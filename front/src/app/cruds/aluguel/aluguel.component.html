@@ -1,0 +1,89 @@
+
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend"></div>
+                    <input type="search" class="form-control" name="word"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-row" *ngIf="!newAluguel">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="createAluguel()">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4" *ngIf="newAluguel">
+        <div class="col"><input placeholder="Id Produto" type="text" class="form-control" [(ngModel)]="newAluguel.id_produto" name="id_produto" /></div>
+        <div class="col"><input placeholder="Data de Inicio" type="text" class="form-control" [(ngModel)]="newAluguel.data_comeco" name="data_comeco" /></div>
+        <div class="col"><input placeholder="Data Final" type="text" class="form-control" [(ngModel)]="newAluguel.data_fim" name="data_fim" /></div>
+        <div class="col"><input placeholder="Preço Aluguel" type="text" class="form-control" [(ngModel)]="newAluguel.preco" name="preco" /></div>
+        <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertAluguel()">Salvar</button></div>
+    </div>
+    <div class="form-row" *ngIf="newAluguel">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="newAluguel = null">
+                <i class="fa fa-remove"></i> Cancelar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id Produto</th>
+                            <th>Data de Inicio</th>
+                            <th>Data Final</th>
+                            <th>Preço<br /></th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="alugueis && alugueis.length">
+                        <tr *ngFor="let aluguel of alugueis">
+                            <ng-template [ngIf]="selectedToEdit != aluguel.id">
+                                <td>{{ aluguel.id_produto }}</td>
+                                <td>{{ aluguel.data_comeco }}</td>
+                                <td>{{ aluguel.data_fim}}</td>
+                                <td>{{ aluguel.preco }}</td>
+                            </ng-template>
+                            <ng-template [ngIf]="selectedToEdit == aluguel.id">
+                                <td><input type="text" class="form-control" [(ngModel)]="aluguel.id_produto" name="id_produto" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="aluguel.data_comeco" name="data_comeco" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="aluguel.data_fim" name="data_fim" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="aluguel.preco" name="preco" /></td>
+                            </ng-template>
+
+                            <td class="text-center" *ngIf="selectedToEdit != aluguel.id">
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = aluguel.id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="deleteAluguel(aluguel)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="text-center" *ngIf="selectedToEdit == aluguel.id" >
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="updateAluguel(aluguel)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

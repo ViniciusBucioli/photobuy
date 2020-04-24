@@ -1,0 +1,24 @@
+<app-funcionario-header></app-funcionario-header>
+<div class="container">
+    <div class="row">
+        <div class="col-6"><img [src]="'../../../../assets/img/catalogue/' + leftPage.toString() + '.png'"/></div>
+        <div class="col-6"><img [src]="'../../../../assets/img/catalogue/' + rightPage.toString() + '.png'"/></div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-primary border rounded-0" type="button" style="width: 100px;"
+                (click)="previous()">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
+        <div class="col text-center">
+            <button class="btn btn-primary border rounded-0" type="button" style="width: 100px;"
+                (click)="next()">
+                <i class="fa fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center mt-3"><button class="btn btn-primary" type="button">Pedir um novo</button></div>
+    </div>
+</div>

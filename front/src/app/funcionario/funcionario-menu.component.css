@@ -1,0 +1,7 @@
+li:hover {
+    background-color: #ababab;
+  }
+
+  li {
+      cursor: pointer;
+  }

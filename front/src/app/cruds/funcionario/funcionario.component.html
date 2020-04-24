@@ -1,0 +1,117 @@
+
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend"></div>
+                    <input type="search" class="form-control" name="word"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-row" *ngIf="!newFuncionario">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="createFuncionario()">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4" *ngIf="newFuncionario">
+        <div class="col"><input placeholder="CPF" type="text" class="form-control" [(ngModel)]="newFuncionario.cpf" name="cpf" /></div>
+        <div class="col"><input placeholder="Nome" type="text" class="form-control" [(ngModel)]="newFuncionario.nome" name="nome" /></div>
+        <div class="col"><input placeholder="Cargo" type="text" class="form-control" [(ngModel)]="newFuncionario.cargo" name="cargo" /></div>
+        <div class="col"><input placeholder="Hora de Trabalho" type="text" class="form-control" [(ngModel)]="newFuncionario.hora" name="hora" /></div>
+        <div class="col"><input placeholder="E-mail" type="text" class="form-control" [(ngModel)]="newFuncionario.email" name="email" /></div>
+        <div class="col"><input placeholder="Salario" type="text" class="form-control" [(ngModel)]="newFuncionario.salario" name="salario" /></div>
+        <div class="col"><input placeholder="Telefone" type="text" class="form-control" [(ngModel)]="newFuncionario.telefone" name="telefone" /></div>
+        <div class="col"><input placeholder="Endereço" type="text" class="form-control" [(ngModel)]="newFuncionario.endereco" name="endereco" /></div>
+        <div class="col"><input placeholder="Meta de trabalho" type="text" class="form-control" [(ngModel)]="newFuncionario.meta" name="meta" /></div>
+        <div class="col"><input placeholder="Comissão" type="text" class="form-control" [(ngModel)]="newFuncionario.comissao" name="comissao" /></div>
+        <div class="col"><input placeholder="Vendas" type="text" class="form-control" [(ngModel)]="newFuncionario.vendas" name="vendas" /></div>
+        <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertFuncionario()">Salvar</button></div>
+    </div>
+    <div class="form-row" *ngIf="newFuncionario">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="newFuncionario = null">
+                <i class="fa fa-remove"></i> Cancelar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Cargo</th>
+                            <th>Hora de Trabalho<br /></th>
+                            <th>E-mail</th>
+                            <th>Salario</th>
+                            <th>Telefone</th>
+                            <th>Endereco<br /></th>
+                            <th>Meta</th>
+                            <th>Comissão</th>
+                            <th>Vendas</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="funcionarios && funcionarios.length">
+                        <tr *ngFor="let funcionario of funcionarios">
+                            <ng-template [ngIf]="selectedToEdit != funcionario.id">
+                                <td>{{funcionario.nome}}</td>
+                                <td>{{funcionario.cpf}}</td>
+                                <td>{{funcionario.cargo}}</td>
+                                <td>{{funcionario.hora}}</td>
+                                <td>{{funcionario.email}}</td>
+                                <td>{{funcionario.salario}}</td>
+                                <td>{{funcionario.telefone}}</td>
+                                <td>{{funcionario.endereco}}</td>
+                                <td>{{funcionario.meta}}</td>
+                                <td>{{funcionario.comissao}}</td>
+                                <td>{{funcionario.vendas}}</td>
+                            </ng-template>
+                            <ng-template [ngIf]="selectedToEdit == funcionario.id">
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.nome" name="nome" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.cpf" name="cpf" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.cargo" name="cargo" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.hora" name="hora" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.email" name="email" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.salario" name="salario" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.telefone" name="telefone" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.endereco" name="endereco" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.meta" name="meta" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.comissao" name="comissao" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="funcionario.vendas" name="vendas" /></td>
+                            </ng-template>
+
+                            <td class="text-center" *ngIf="selectedToEdit != funcionario.id">
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = funcionario.id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="deleteFuncionario(funcionario)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="text-center" *ngIf="selectedToEdit == funcionario.id" >
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="updateFuncionario(funcionario)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

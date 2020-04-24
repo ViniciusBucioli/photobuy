@@ -1,0 +1,93 @@
+
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend"></div>
+                    <input type="search" class="form-control" name="word"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-row" *ngIf="!newServico">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="createServico()">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4" *ngIf="newServico">
+        <div class="col"><input placeholder="Nome" type="text" class="form-control" [(ngModel)]="newServico.nome" name="nome" /></div>
+        <div class="col"><input placeholder="Oferecido por" type="text" class="form-control" [(ngModel)]="newServico.oferecidopor" name="oferecidopor" /></div>
+        <div class="col"><input placeholder="Categoria" type="text" class="form-control" [(ngModel)]="newServico.categoria" name="categoria" /></div>
+        <div class="col"><input placeholder="Preço" type="text" class="form-control" [(ngModel)]="newServico.preco" name="preco" /></div>
+        <div class="col"><input placeholder="Descrição" type="text" class="form-control" [(ngModel)]="newServico.descricao" name="descricao" /></div>
+        <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertServico()">Salvar</button></div>
+    </div>
+    <div class="form-row" *ngIf="newServico">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="newServico = null">
+                <i class="fa fa-remove"></i> Cancelar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Oferecido por</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Descrição<br /></th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="servicos && servicos.length">
+                        <tr *ngFor="let servico of servicos">
+                            <ng-template [ngIf]="selectedToEdit != servico.id">
+                                <td>{{ servico.nome }}</td>
+                                <td>{{ servico.oferecidopor }}</td>
+                                <td>{{ servico.categoria }}</td>
+                                <td>{{ servico.preco }}</td>
+                                <td>{{ servico.descricao }}</td>
+                            </ng-template>
+                            <ng-template [ngIf]="selectedToEdit == servico.id">
+                                <td><input type="text" class="form-control" [(ngModel)]="servico.nome" name="nome" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="servico.oferecidopor" name="oferecidopor" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="servico.categoria" name="categoria" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="servico.preco" name="preco" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="servico.descricao" name="descricao" /></td>
+                            </ng-template>
+
+                            <td class="text-center" *ngIf="selectedToEdit != servico.id">
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = servico.id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="deleteServico(servico)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="text-center" *ngIf="selectedToEdit == servico.id" >
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="updateServico(servico)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,85 @@
+
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend"></div>
+                    <input type="search" class="form-control" name="word"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-row" *ngIf="!newPonto">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="createPonto()">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4" *ngIf="newPonto">
+        <div class="col"><input placeholder="Matricula" type="text" class="form-control" [(ngModel)]="newPonto.matricula" name="matricula" /></div>
+        <div class="col"><input placeholder="Entrada" type="text" class="form-control" [(ngModel)]="newPonto.entrada" name="entrada" /></div>
+        <div class="col"><input placeholder="Saida" type="text" class="form-control" [(ngModel)]="newPonto.saida" name="saida" /></div>
+        <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertPonto()">Salvar</button></div>
+    </div>
+    <div class="form-row" *ngIf="newPonto">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="newPonto = null">
+                <i class="fa fa-remove"></i> Cancelar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Entrada</th>
+                            <th>Saida<br /></th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="ponto && ponto.length">
+                        <tr *ngFor="let ponto of ponto">
+                            <ng-template [ngIf]="selectedToEdit != ponto.id">
+                                <td>{{ ponto.matricula }}</td>
+                                <td>{{ ponto.entrada }}</td>
+                                <td>{{ ponto.saida }}</td>
+                            </ng-template>
+                            <ng-template [ngIf]="selectedToEdit == ponto.id">
+                                <td><input type="text" class="form-control" [(ngModel)]="ponto.matricula" name="nome" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="ponto.entrada" name="categoria" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="ponto.saida" name="preco" /></td>
+                            </ng-template>
+
+                            <td class="text-center" *ngIf="selectedToEdit != ponto.id">
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = ponto.id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="deletePonto(ponto)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="text-center" *ngIf="selectedToEdit == ponto.id" >
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="updatePonto(ponto)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

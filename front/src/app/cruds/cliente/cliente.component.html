@@ -1,0 +1,93 @@
+
+    <form>
+      <div class="form-row">
+          <div class="col">
+              <div class="input-group">
+                  <div class="input-group-prepend"></div>
+                  <input type="search" class="form-control" name="word"/>
+                  <div class="input-group-append">
+                      <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+  <div class="form-row" *ngIf="!newCliente">
+      <div class="col text-right mt-2 mb-2">
+          <button class="btn btn-primary" type="button" (click)="createCliente()">
+              <i class="fa fa-plus"></i> Adicionar
+          </button>
+      </div>
+  </div>
+  <div class="form-row mt-4" *ngIf="newCliente">
+      <div class="col"><input placeholder="Nome" type="text" class="form-control" [(ngModel)]="newCliente.nome" name="nome" /></div>
+      <div class="col"><input placeholder="CPF" type="text" class="form-control" [(ngModel)]="newCliente.CPF" name="CPF" /></div>
+      <div class="col"><input placeholder="E-mail" type="text" class="form-control" [(ngModel)]="newCliente.email" name="email" /></div>
+      <div class="col"><input placeholder="Telefone" type="text" class="form-control" [(ngModel)]="newCliente.telefone" name="telefone" /></div>
+      <div class="col"><input placeholder="Endereço" type="text" class="form-control" [(ngModel)]="newCliente.endereco" name="endereco" /></div>
+      <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertCliente()">Salvar</button></div>
+  </div>
+  <div class="form-row" *ngIf="newCliente">
+      <div class="col text-right mt-2 mb-2">
+          <button class="btn btn-primary" type="button" (click)="newCliente = null">
+              <i class="fa fa-remove"></i> Cancelar
+          </button>
+      </div>
+  </div>
+  <div class="form-row mt-4">
+      <div class="col">
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Nome</th>
+                          <th>CPF</th>
+                          <th>E-mail</th>
+                          <th>Telefone<br />
+                          <th>Endereço<br /></th>
+                          <th class="text-center">Ações</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="clientes && clientes.length">
+                      <tr *ngFor="let cliente of clientes">
+                          <ng-template [ngIf]="selectedToEdit != cliente.id">
+                              <td>{{ cliente.nome }}</td>
+                              <td>{{ cliente.CPF }}</td>
+                              <td>{{ cliente.email }}</td>
+                              <td>{{ cliente.telefone }}</td>
+                              <td>{{ cliente.endereco }}</td>
+                          </ng-template>
+                          <ng-template [ngIf]="selectedToEdit == cliente.id">
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome" /></td>
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.CPF" name="CPF" /></td>
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" /></td>
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.telefone" name="telefone" /></td>
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" /></td>
+                          </ng-template>
+
+                          <td class="text-center" *ngIf="selectedToEdit != cliente.id">
+                              <div role="group" class="btn-group">
+                                  <button class="btn btn-primary" type="button" (click)="selectedToEdit = cliente.id">
+                                      <i class="fas fa-edit"></i>
+                                  </button>
+                                  <button class="btn btn-primary" type="button" (click)="deleteCliente(cliente)">
+                                      <i class="fa fa-trash"></i>
+                                  </button>
+                              </div>
+                          </td>
+                          <td class="text-center" *ngIf="selectedToEdit == cliente.id" >
+                              <div role="group" class="btn-group">
+                                  <button class="btn btn-primary" type="button" (click)="updateCliente(cliente)">
+                                      <i class="fas fa-check"></i>
+                                  </button>
+                                  <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                      <i class="fa fa-remove"></i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>

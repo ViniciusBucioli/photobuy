@@ -1,0 +1,30 @@
+
+
+<nav class="navbar navbar-light navbar-expand-lg bg-secondary mb-2" id="mainNav-1">
+    <div class="container"><a class="navbar-brand" href="#"><img class="rounded-circle" src="assets/img/christopher-campbell-rDEOVtE7vOs-unsplash.jpg" width="60px" height="60px"></a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#contact">Info</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#portfolio">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <app-gerente-sidebar (menuChange)="menuChanged($event)" class="col-2 sidebar" id="sidebar"></app-gerente-sidebar>
+        <app-produto class="col-8 mt-4" *ngIf="menu.produtos == menuSelected"></app-produto>
+        <app-aluguel class="col-8 mt-4" *ngIf="menu.alugueis == menuSelected"></app-aluguel>
+        <app-cliente class="col-8 mt-4" *ngIf="menu.clientes == menuSelected"></app-cliente>
+        <app-estoque class="col-8 mt-4" *ngIf="menu.estoque == menuSelected"></app-estoque>
+        <app-funcionario class="col-8 mt-4" *ngIf="menu.funcionarios == menuSelected"></app-funcionario>
+        <!--<app-ponto class="col-8 mt-4" *ngIf="menu.ponto == menuSelected"></app-ponto>-->
+        <app-portifolio class="col-8 mt-4" *ngIf="menu.portifolio == menuSelected"></app-portifolio>
+        <app-servico class="col-8 mt-4" *ngIf="menu.servicos == menuSelected"></app-servico>
+        <app-venda class="col-8 mt-4" *ngIf="menu.vendas == menuSelected"></app-venda>
+        <div class="col-2"></div>
+    </div>
+</div>

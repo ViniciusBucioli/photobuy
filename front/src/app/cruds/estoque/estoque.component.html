@@ -1,0 +1,81 @@
+
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend"></div>
+                    <input type="search" class="form-control" name="word"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="submit" type="button">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-row" *ngIf="!newEstoque">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="createEstoque()">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4" *ngIf="newEstoque">
+        <div class="col"><input placeholder="Quantidade de Movimento" type="text" class="form-control" [(ngModel)]="newEstoque.qtd" name="qtd" /></div>
+        <div class="col"><input placeholder="Quantidade de Estoque" type="text" class="form-control" [(ngModel)]="newEstoque.quantidade" name="quantidade" /></div>
+         <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertEstoque()">Salvar</button></div>
+    </div>
+    <div class="form-row" *ngIf="newEstoque">
+        <div class="col text-right mt-2 mb-2">
+            <button class="btn btn-primary" type="button" (click)="newEstoque = null">
+                <i class="fa fa-remove"></i> Cancelar
+            </button>
+        </div>
+    </div>
+    <div class="form-row mt-4">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Quantidade de Movimento</th>
+                            <th>Quantidade de Estoque</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="estoque && estoque.length">
+                        <tr *ngFor="let estoque of estoque">
+                            <ng-template [ngIf]="selectedToEdit != estoque.id">
+                                <td>{{ estoque.qtd }}</td>
+                                <td>{{ estoque.quantidade}}</td>
+                            </ng-template>
+                            <ng-template [ngIf]="selectedToEdit == estoque.id">
+                                <td><input type="text" class="form-control" [(ngModel)]="estoque.qtd" name="qtd" /></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="estoque.quantidade" name="quantidade" /></td>
+                            </ng-template>
+
+                            <td class="text-center" *ngIf="selectedToEdit != estoque.id">
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = estoque.id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="deleteEstoque(estoque)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="text-center" *ngIf="selectedToEdit == estoque.id" >
+                                <div role="group" class="btn-group">
+                                    <button class="btn btn-primary" type="button" (click)="updateEstoque(estoque)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" (click)="selectedToEdit = 0">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
