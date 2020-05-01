@@ -21,7 +21,7 @@ export class VendaComponent implements OnInit {
         this.getVendas();
     }
 
-    private getVendas(){
+    private getVendas() {
         this.vendaService.search('').subscribe(
             (vendas: Array<VendaModel>) => {
                 this.vendas = vendas;
