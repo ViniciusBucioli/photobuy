@@ -9,7 +9,7 @@ import { EstoqueService } from './estoque.service';
 })
 export class EstoqueComponent implements OnInit {
 
-  public estoque: Array<EstoqueModel>;
+    public estoques: Array<EstoqueModel>;
 
     public selectedToEdit: number;
     public newEstoque: EstoqueModel;
@@ -22,7 +22,7 @@ export class EstoqueComponent implements OnInit {
         this.getEstoque();
     }
 
-    private getEstoque(){
+    private getEstoque() {
         this.estoqueService.search('').subscribe(
             (estoques: Array<EstoqueModel>) => {
                 this.estoques = estoques;
@@ -34,11 +34,11 @@ export class EstoqueComponent implements OnInit {
     public createEstoque() {
         this.newEstoque = new EstoqueModel();
     }
-    public insertEstoque(){
+    public insertEstoque() {
         this.estoqueService.insert(this.newEstoque).subscribe(
             () => {
                 this.newEstoque = null;
-                this.getEstoques();
+                this.getEstoque();
             },
             this.defaultError
         )
@@ -57,7 +57,7 @@ export class EstoqueComponent implements OnInit {
     public deleteEstoque(estoque: EstoqueModel) {
         this.estoqueService.delete(estoque.id).subscribe(
             () => {
-                this.getEstoques();
+                this.getEstoque();
             },
             this.defaultError
         )

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PontoModel } from '../models/ponto-model..model';
+import { PontoService } from './ponto.service';
 
 @Component({
   selector: 'app-ponto',
@@ -6,10 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ponto.component.css']
 })
 export class PontoComponent implements OnInit {
-
-  export class PontoComponent implements OnInit {
-
-    public ponto: Array<PontoModel>;
+    public pontos: Array<PontoModel>;
     public selectedToEdit: number;
     public newPonto: PontoModel;
 
@@ -21,7 +20,7 @@ export class PontoComponent implements OnInit {
         this.getPonto();
     }
 
-    private getPonto(){
+    private getPonto() {
         this.pontoService.search('').subscribe(
             (pontos: Array<PontoModel>) => {
                 this.pontos = pontos;
@@ -33,24 +32,24 @@ export class PontoComponent implements OnInit {
     public createPonto() {
         this.newPonto = new PontoModel();
     }
-    public insertPonto(){
+    public insertPonto() {
         this.pontoService.insert(this.newPonto).subscribe(
             () => {
                 this.newPonto = null;
                 this.getPonto();
             },
             this.defaultError
-        )
+        );
     }
 
-    public updateponto(ponto: PontoModel){
+    public updateponto(ponto: PontoModel) {
         this.pontoService.update(ponto).subscribe(
             (e:any) => {
                 this.selectedToEdit = 0;
                 this.getPonto();
             },
             this.defaultError
-        )
+        );
     }
 
     public deletePonto(ponto: PontoModel) {

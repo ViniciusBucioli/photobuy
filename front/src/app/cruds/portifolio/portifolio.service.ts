@@ -7,7 +7,7 @@ import { PhpService } from '../../php.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PortofolioService {
+export class PortifolioService {
 
     constructor(
         private phpService: PhpService

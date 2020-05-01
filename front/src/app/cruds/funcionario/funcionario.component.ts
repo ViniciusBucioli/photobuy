@@ -9,9 +9,7 @@ import { FuncionarioService } from './funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  export class FuncionarioComponent implements OnInit {
-
-    public funcioanrio: Array<FuncionarioModel>;
+    public funcionarios: Array<FuncionarioModel>;
     public selectedToEdit: number;
     public newFuncionario: FuncionarioModel;
 
@@ -26,7 +24,7 @@ export class FuncionarioComponent implements OnInit {
     private getFuncionarios(){
         this.funcionarioService.search('').subscribe(
             (funcionarios: Array<FuncionarioModel>) => {
-                this.funcionario = funcionario;
+                this.funcionarios = funcionarios;
             },
             this.defaultError
         );

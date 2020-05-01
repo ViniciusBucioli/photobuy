@@ -9,9 +9,7 @@ import { VendaService } from './venda.service';
 })
 export class VendaComponent implements OnInit {
 
-  export class VendaComponent implements OnInit {
-
-    public Vendas: Array<VendaModel>;
+    public vendas: Array<VendaModel>;
     public selectedToEdit: number;
     public newVenda: VendaModel;
 
@@ -24,7 +22,7 @@ export class VendaComponent implements OnInit {
     }
 
     private getVendas(){
-        this.VendaService.search('').subscribe(
+        this.vendaService.search('').subscribe(
             (vendas: Array<VendaModel>) => {
                 this.vendas = vendas;
             },
@@ -35,8 +33,8 @@ export class VendaComponent implements OnInit {
     public createVenda() {
         this.newVenda = new VendaModel();
     }
-    public insertVendas(){
-        this.VendaService.insert(this.newVenda).subscribe(
+    public insertVendas() {
+        this.vendaService.insert(this.newVenda).subscribe(
             () => {
                 this.newVenda = null;
                 this.getVendas();
@@ -45,9 +43,9 @@ export class VendaComponent implements OnInit {
         )
     }
 
-    public updateVenda(venda: VendaModel){
-        this.VendaService.update(venda).subscribe(
-            (e:any) => {
+    public updateVenda(venda: VendaModel) {
+        this.vendaService.update(venda).subscribe(
+            (e: any) => {
                 this.selectedToEdit = 0;
                 this.getVendas();
             },
@@ -56,7 +54,7 @@ export class VendaComponent implements OnInit {
     }
 
     public deleteVenda(venda: VendaModel) {
-        this.VendaService.delete(venda.id).subscribe(
+        this.vendaService.delete(venda.id).subscribe(
             () => {
                 this.getVendas();
             },

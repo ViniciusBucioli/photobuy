@@ -4,7 +4,7 @@ export class FuncionarioModel {
     public cpf: number;
     public nome: string;
     public cargo: string;
-    public hora: datetime;
+    public hora: Date;
     public email: string;
     public salario: number;
     public telefone: number;

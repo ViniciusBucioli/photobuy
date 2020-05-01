@@ -8,9 +8,6 @@ import { ServicoService } from './servico.service';
   styleUrls: ['./servico.component.css']
 })
 export class ServicoComponent implements OnInit {
-
-  export class ServicoComponent implements OnInit {
-
     public servicos: Array<ServicoModel>;
     public selectedToEdit: number;
     public newServico: ServicoModel;

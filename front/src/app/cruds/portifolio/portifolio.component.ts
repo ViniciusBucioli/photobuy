@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PortifolioService } from '../models/portifolio-model..model';
+import { PortifolioModel } from '../models/portifolio-model..model';
 import { PortifolioService } from './portifolio.service';
-
 
 @Component({
   selector: 'app-portifolio',
@@ -15,7 +14,7 @@ import { PortifolioService } from './portifolio.service';
     public newPortifolio: PortifolioModel;
 
     constructor(
-        private PortifolioService: PortifolioService
+        private portifolioService: PortifolioService
     ) { }
 
     ngOnInit() {
@@ -23,7 +22,7 @@ import { PortifolioService } from './portifolio.service';
     }
 
     private getPortifolio(){
-        this.PortifolioService.search('').subscribe(
+        this.portifolioService.search('').subscribe(
             (portifolios: Array<PortifolioModel>) => {
                 this.portifolios = portifolios;
             },
@@ -34,8 +33,8 @@ import { PortifolioService } from './portifolio.service';
     public createPortifolios() {
         this.newPortifolio = new PortifolioModel();
     }
-    public insertPortifolio(){
-        this.PortifolioService.insert(this.newPortifolio).subscribe(
+    public insertPortifolio() {
+        this.portifolioService.insert(this.newPortifolio).subscribe(
             () => {
                 this.newPortifolio = null;
                 this.getPortifolio();
@@ -44,9 +43,9 @@ import { PortifolioService } from './portifolio.service';
         )
     }
 
-    public updatePortifolio(portifolio: PortifolioModel){
-        this.PortifolioService.update(portifolio).subscribe(
-            (e:any) => {
+    public updatePortifolio(portifolio: PortifolioModel) {
+        this.portifolioService.update(portifolio).subscribe(
+            (e: any) => {
                 this.selectedToEdit = 0;
                 this.getPortifolio();
             },
@@ -55,7 +54,7 @@ import { PortifolioService } from './portifolio.service';
     }
 
     public deletePortifolio(portifolio: PortifolioModel) {
-        this.PortifolioService.delete(portifolio.id).subscribe(
+        this.portifolioService.delete(portifolio.id).subscribe(
             () => {
                 this.getPortifolio();
             },
