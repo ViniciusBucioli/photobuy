@@ -14,3 +14,8 @@
         >npm install
     Rodar o angular
         >ng serve
+
+## Banco mysql
+    Tenha o mysql 8.0
+    Execute (win + R): net start MySQL80
+    Exemplo ao se conectar > mysql -h localhost -u root -p fotobuy
