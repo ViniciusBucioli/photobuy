@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteModel } from '../models/cliente-model..model';
-import { ClienteService } from './cliente.service';
+import { ClienteService } from './cliente-crud.service';
 
 @Component({
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  selector: 'app-cliente-crud',
+  templateUrl: './cliente-crud.component.html',
+  styleUrls: ['./cliente-crud.component.css']
 })
-export class ClienteComponent implements OnInit {
+export class ClienteCrudComponent implements OnInit {
 
   public clientes: Array<ClienteModel>;
   public selectedToEdit: number;

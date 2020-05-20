@@ -14,29 +14,29 @@ import { FuncionarioRelatoriosComponent } from './funcionario/gestao/funcionario
 import { FuncionarioCatalogoComponent } from './funcionario/portifolio/funcionario-catalogo/funcionario-catalogo.component';
 import { FuncionarioPedidosComponent } from './funcionario/portifolio/funcionario-pedidos/funcionario-pedidos.component';
 import { FuncionarioProdutoComponent } from './funcionario/portifolio/funcionario-produto/funcionario-produto.component';
-import { EnvioPortifolioComponent } from './envio-portifolio/envio-portifolio.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 const routes: Routes = [
     {
-        path:'',
+        path: '',
         component: LandingPageComponent
     },
     {
-        path: 'envie-portifolio',
-        component: EnvioPortifolioComponent
-    },
-    {
-        path:'gerente',
+        path: 'gerente',
         component: GerenteComponent
     },
     {
-        path:'funcionario',
+        path: 'cliente',
+        component: ClienteComponent
+    },
+    {
+        path: 'funcionario',
         children:[{
             path: '',
             component: FuncionarioMenuComponent,
         },
         {
-            path:'atividades',
+            path: 'atividades',
             children: [
             {
                 path: 'calendario',

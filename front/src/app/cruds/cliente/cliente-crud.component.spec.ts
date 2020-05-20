@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnvioPortifolioComponent } from './envio-portifolio.component';
+import { ClienteComponent } from './cliente-crud.component';
 
-describe('EnvioPortifolioComponent', () => {
-  let component: EnvioPortifolioComponent;
-  let fixture: ComponentFixture<EnvioPortifolioComponent>;
+describe('ClienteComponent', () => {
+  let component: ClienteComponent;
+  let fixture: ComponentFixture<ClienteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnvioPortifolioComponent ]
+      declarations: [ ClienteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EnvioPortifolioComponent);
+    fixture = TestBed.createComponent(ClienteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

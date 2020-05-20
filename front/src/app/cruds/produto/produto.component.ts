@@ -12,6 +12,7 @@ export class ProdutoComponent implements OnInit {
     public produtos: Array<ProdutoModel>;
     public selectedToEdit: number;
     public newProduto: ProdutoModel;
+    public selectedImgFile: File;
 
     constructor(
         private produtoService: ProdutoService
@@ -33,7 +34,7 @@ export class ProdutoComponent implements OnInit {
     public createProduto() {
         this.newProduto = new ProdutoModel();
     }
-    public insertProduto(){
+    public insertProduto() {
         this.produtoService.insert(this.newProduto).subscribe(
             () => {
                 this.newProduto = null;
@@ -43,14 +44,22 @@ export class ProdutoComponent implements OnInit {
         )
     }
 
-    public updateProduto(produto: ProdutoModel){
-        this.produtoService.update(produto).subscribe(
-            (e:any) => {
-                this.selectedToEdit = 0;
-                this.getProdutos();
-            },
-            this.defaultError
-        )
+    public async updateProduto(produto: ProdutoModel) {
+        // await this.produtoService.update(produto).toPromise().then(
+        //     (e: any) => {
+        //         this.selectedToEdit = 0;
+        //         this.getProdutos();
+        //     },
+        //     this.defaultError
+        // );
+        await this.produtoService.postImg(this.selectedImgFile).toPromise().then(
+          (result: boolean) => {
+              if (result) {
+                  debugger;
+                  console.log("sucess");
+              }
+          }
+        );
     }
 
     public deleteProduto(produto: ProdutoModel) {
@@ -62,8 +71,12 @@ export class ProdutoComponent implements OnInit {
         )
     }
 
-    private defaultError(e: any){
+    private defaultError(e: any) {
         console.error(e);
+    }
+
+    public handleFileInput(files: any) {
+      this.selectedImgFile = files.item(0);
     }
 
 }

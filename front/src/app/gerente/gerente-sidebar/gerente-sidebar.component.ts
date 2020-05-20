@@ -8,7 +8,7 @@ import { GerenteSidebarEnum } from '../../enums/gerente-sidebar.enum';
 })
 export class GerenteSidebarComponent implements OnInit {
 
-    public selected: GerenteSidebarEnum;
+    public selected: GerenteSidebarEnum = GerenteSidebarEnum.produtos;
 
     public gerenteSidebarEnum: typeof GerenteSidebarEnum = GerenteSidebarEnum;
     @Output() menuChange = new EventEmitter();

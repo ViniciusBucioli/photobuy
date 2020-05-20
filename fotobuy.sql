@@ -1,7 +1,10 @@
+-- cmd
+-- mysql -h localhost -u root -p fotobuy
+
 start transaction;
-create schema kovacs_producoes;
--- drop schema kovacs_producoes;
-use kovacs_producoes;
+create schema fotobuy;
+-- drop schema fotobuy;
+use fotobuy;
 -- Table: Aluguel_Produto
 CREATE TABLE Aluguel_Produto (
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -23,7 +26,7 @@ CREATE TABLE Cliente (
 -- Table: Estoque
 CREATE TABLE Estoque (
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    qtd int NOT NULL, --moviemtno
+    qtd int NOT NULL,
     quantidade int NOT NULL
 );
 
@@ -57,20 +60,6 @@ INSERT INTO Funcionario (
     'bacon123');
     
 
--- Table: Ponto
-CREATE TABLE Ponto (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL, 
-    matricula int (8) NOT NULL REFERENCES Funcionario (id), 
-    entrada DATETIME, 
-    saida DATETIME);
-
--- Table: Portifolio
-CREATE TABLE Portifolio (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL, 
-    nome TEXT (100) NOT NULL
-    arquivo BLOB NOT NULL, 
-);
-
 -- Table: Produto
 CREATE TABLE Produto (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -85,11 +74,11 @@ insert into produto values (default, "Pano verde", "Estudio", 200, "Pano verde p
 -- Table: Servico
 CREATE TABLE Servico (
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    nome TEXT (100) NOT NULL
+    nome TEXT (100) NOT NULL,
     oferecido_por int NOT NULL REFERENCES Funcionario (id),
     categoria TEXT (50) NOT NULL, 
     preco int NOT NULL, 
-    descricao TEXT (200) NOT NULL, 
+    descricao TEXT (200) NOT NULL
 );
 
 -- Table: Venda

@@ -20,11 +20,12 @@
         </div>
     </div>
     <div class="form-row mt-4" *ngIf="newProduto">
-        <div class="col"><input placeholder="Nome" type="text" class="form-control" [(ngModel)]="newProduto.nome" name="nome" /></div>
-        <div class="col"><input placeholder="Categoria" type="text" class="form-control" [(ngModel)]="newProduto.categoria" name="categoria" /></div>
-        <div class="col"><input placeholder="Preço" type="text" class="form-control" [(ngModel)]="newProduto.preco" name="preco" /></div>
-        <div class="col"><input placeholder="Descrição" type="text" class="form-control" [(ngModel)]="newProduto.descricao" name="descricao" /></div>
-        <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertProduto()">Salvar</button></div>
+        <div class="col"><input placeholder="Nome"       type="text" class="form-control" [(ngModel)]="newProduto.nome" name="nome" /></div>
+        <div class="col"><input placeholder="Categoria"  type="text" class="form-control" [(ngModel)]="newProduto.categoria" name="categoria" /></div>
+        <div class="col"><input placeholder="Preço"      type="text" class="form-control" [(ngModel)]="newProduto.preco" name="preco" /></div>
+        <div class="col"><input placeholder="Descrição"  type="text" class="form-control" [(ngModel)]="newProduto.descricao" name="descricao" /></div>
+        <div class="col"><input                          type="file" name="productImg" id="fileToUpload" (change)="handleFileInput($event.target.files)"></div>
+        <div class="col"><button class="btn btn-primary" type="button" id="submit" (click)="insertProduto()">Salvar</button></div>
     </div>
     <div class="form-row" *ngIf="newProduto">
         <div class="col text-right mt-2 mb-2">
@@ -43,6 +44,7 @@
                             <th>Categoria</th>
                             <th>Preço</th>
                             <th>Descrição<br /></th>
+                            <th>Imagem</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
@@ -52,6 +54,7 @@
                                 <td>{{ produto.nome }}</td>
                                 <td>{{ produto.categoria }}</td>
                                 <td>{{ produto.preco }}</td>
+                                <td>{{ produto.img }}</td>
                                 <td>{{ produto.descricao }}</td>
                             </ng-template>
                             <ng-template [ngIf]="selectedToEdit == produto.id">

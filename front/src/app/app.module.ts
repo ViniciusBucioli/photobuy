@@ -24,8 +24,8 @@ import { FuncionarioCatalogoComponent } from './funcionario/portifolio/funcionar
 import { FuncionarioPedidosComponent } from './funcionario/portifolio/funcionario-pedidos/funcionario-pedidos.component';
 import { FuncionarioAtendimentoComponent } from './funcionario/gestao/funcionario-atendimento/funcionario-atendimento.component';
 import { ClienteInfoComponent } from './funcionario/gestao/funcionario-clientes/cliente-info/cliente-info.component';
-import { EnvioPortifolioComponent } from './envio-portifolio/envio-portifolio.component';
-import { ClienteComponent } from './cruds/cliente/cliente.component';
+import { ClienteCrudComponent } from './cruds/cliente/cliente-crud.component';
+import { ClienteComponent } from './cliente/cliente.component'
 import { AluguelComponent } from './cruds/aluguel/aluguel.component';
 import { EstoqueComponent } from './cruds/estoque/estoque.component';
 import { PontoComponent } from './cruds/ponto/ponto.component';
@@ -33,6 +33,7 @@ import { PortifolioComponent } from './cruds/portifolio/portifolio.component';
 import { ServicoComponent } from './cruds/servico/servico.component';
 import { VendaComponent } from './cruds/venda/venda.component';
 import { FuncionarioComponent } from './cruds/funcionario/funcionario.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FuncionarioComponent } from './cruds/funcionario/funcionario.component'
     FuncionarioMenuComponent,
     FuncionarioSidebarComponent,
     FuncionarioHeaderComponent,
+    HeaderComponent,
     FuncionarioCalendarioComponent,
     FuncionarioServicesComponent,
     FuncionarioClientesComponent,
@@ -55,7 +57,7 @@ import { FuncionarioComponent } from './cruds/funcionario/funcionario.component'
     FuncionarioPedidosComponent,
     FuncionarioAtendimentoComponent,
     ClienteInfoComponent,
-    EnvioPortifolioComponent,
+    ClienteCrudComponent,
     ClienteComponent,
     AluguelComponent,
     EstoqueComponent,

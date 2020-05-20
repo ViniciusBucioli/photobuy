@@ -5,7 +5,7 @@ class db {
     private $host="localhost";
     private $user="root";
     private $password="";
-    private $db="kovacs_producoes";
+    private $db="fotobuy";
 
     //Connection attemp
     public $connection;
