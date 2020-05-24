@@ -66,7 +66,8 @@ CREATE TABLE Produto (
      nome TEXT (100) NOT NULL,
       categoria TEXT (50) NOT NULL, 
       preco int NOT NULL, 
-      descricao TEXT (200) NOT NULL);
+      descricao TEXT (200) NOT NULL,
+      img nvarchar(1000) NULL);
 insert into produto values (default, "Câmera Nikom 15200", "Camera", 1200, "Câmera Nikom com alta qualidade");
 insert into produto values (default, "Tripe", "Acessorios", 300, "Tripe para camera, altura máxima 2.5 m");
 insert into produto values (default, "Pano verde", "Estudio", 200, "Pano verde para o plano de fundo 5m x 5m");

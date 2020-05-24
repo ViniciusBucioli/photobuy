@@ -1,0 +1,7 @@
+
+<div class="wrapper waves-effect">
+    <input type="file" name="file" id="file" class="inputfile" (change)="ImgSelect.emit($event.target.files)" />
+    <mat-icon>file_upload</mat-icon>
+    <label *ngIf="!img" for="file">Foto do produto</label>
+    <label *ngIf="img">{{ img.name }}</label>
+</div>

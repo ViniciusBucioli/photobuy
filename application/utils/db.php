@@ -4,7 +4,7 @@ class db {
     //Database credentials
     private $host="localhost";
     private $user="root";
-    private $password="";
+    private $password="1682";
     private $db="fotobuy";
 
     //Connection attemp

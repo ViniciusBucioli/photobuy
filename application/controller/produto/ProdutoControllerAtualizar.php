@@ -20,6 +20,7 @@
     $categoria = $_POST['categoria'];
     $preco = $_POST['preco'];
     $descricao = $_POST['descricao'];
+    $img = $_POST['img'];
 
     $produtoModel = new ProdutoModel();
     $produtoModel->setId($id);
@@ -27,6 +28,7 @@
     $produtoModel->setCategoria($categoria);
     $produtoModel->setPreco($preco);
     $produtoModel->setDescricao($descricao);
+    $produtoModel->setImg($img);
 
     if($produtoModel->atualizar()) {
 

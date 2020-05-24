@@ -24,12 +24,20 @@
         <div class="col"><input placeholder="Categoria"  type="text" class="form-control" [(ngModel)]="newProduto.categoria" name="categoria" /></div>
         <div class="col"><input placeholder="Preço"      type="text" class="form-control" [(ngModel)]="newProduto.preco" name="preco" /></div>
         <div class="col"><input placeholder="Descrição"  type="text" class="form-control" [(ngModel)]="newProduto.descricao" name="descricao" /></div>
-        <div class="col"><input                          type="file" name="productImg" id="fileToUpload" (change)="handleFileInput($event.target.files)"></div>
+        <div class="col">
+            <!-- <app-img-upload-btn [img]="selectedImgFile" (ImgSelect)="handleFileInput($event)"></app-img-upload-btn> -->
+            <div class="wrapper waves-effect">
+                <input type="file" name="file" id="file" class="inputfile" (change)="handleFileInput($event.target.files)" />
+                <mat-icon>file_upload</mat-icon>
+                <label *ngIf="!selectedImgFile" for="file">Foto do produto</label>
+                <label *ngIf="selectedImgFile">{{ selectedImgFile.name }}</label>
+            </div>
+        </div>
         <div class="col"><button class="btn btn-primary" type="button" id="submit" (click)="insertProduto()">Salvar</button></div>
     </div>
     <div class="form-row" *ngIf="newProduto">
         <div class="col text-right mt-2 mb-2">
-            <button class="btn btn-primary" type="button" (click)="newProduto = null">
+            <button class="btn btn-primary" type="button" (click)="newProduto = null; selectedImgFile = null">
                 <i class="fa fa-remove"></i> Cancelar
             </button>
         </div>
@@ -43,7 +51,7 @@
                             <th>Nome</th>
                             <th>Categoria</th>
                             <th>Preço</th>
-                            <th>Descrição<br /></th>
+                            <th>Descrição</th>
                             <th>Imagem</th>
                             <th class="text-center">Ações</th>
                         </tr>
@@ -54,14 +62,26 @@
                                 <td>{{ produto.nome }}</td>
                                 <td>{{ produto.categoria }}</td>
                                 <td>{{ produto.preco }}</td>
-                                <td>{{ produto.img }}</td>
                                 <td>{{ produto.descricao }}</td>
+                                <td>
+                                    <ng-template [ngIf]="produto.img">
+                                        <img class="mini-img img-thumbnail" [src]="globals.imagePath + produto.img" (click)="openImgModal(produto)"/>
+                                    </ng-template>
+                                    <ng-template [ngIf]="!produto.img">
+                                        <img class="mini-img img-thumbnail" [src]="globals.imagePath + 'nophoto_thumbnail.png'"/>
+                                    </ng-template>
+                                </td>
                             </ng-template>
                             <ng-template [ngIf]="selectedToEdit == produto.id">
                                 <td><input type="text" class="form-control" [(ngModel)]="produto.nome" name="nome" /></td>
                                 <td><input type="text" class="form-control" [(ngModel)]="produto.categoria" name="categoria" /></td>
                                 <td><input type="text" class="form-control" [(ngModel)]="produto.preco" name="preco" /></td>
                                 <td><input type="text" class="form-control" [(ngModel)]="produto.descricao" name="descricao" /></td>
+                                <td>
+                                    <ng-template [ngIf]="!produto.img">
+                                    </ng-template>
+                                    <input type="text" class="form-control" [(ngModel)]="produto.img" name="img" />
+                                </td>
                             </ng-template>
 
                             <td class="text-center" *ngIf="selectedToEdit != produto.id">

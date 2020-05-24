@@ -23,6 +23,10 @@
         public function setDescricao($descricao) { $this->descricao = $descricao; }
         public function getDescricao() { return $this->descricao; }
 
+        private $img;
+        public function setImg($img) { $this->img = $img; }
+        public function getImg() { return $this->img; }
+
         private $conn;
         function __construct(){
             $db = new db();
@@ -32,8 +36,8 @@
 
         //está funcionando
         public function cadastrar() {
-            if($query = $this->conn->prepare('INSERT INTO Produto (nome, categoria, preco, descricao) VALUES (?, ?, ?, ?);')){
-                $query->bind_param('ssss', $this->nome, $this->categoria, $this->preco, $this->descricao);
+            if($query = $this->conn->prepare('INSERT INTO Produto (nome, categoria, preco, descricao, img) VALUES (?, ?, ?, ?, ?);')){
+                $query->bind_param('sssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->img);
                 $result = $query->execute();
                 if($result)
                     return true;
@@ -47,8 +51,8 @@
         }
         
         public function atualizar() {
-            if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ? WHERE id = ?')){
-                $query->bind_param('sssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->id);
+            if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ?, img = ? WHERE id = ?')){
+                $query->bind_param('ssssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->img, $this->id);
                 $result = $query->execute();
                 if($result)
                     return true;

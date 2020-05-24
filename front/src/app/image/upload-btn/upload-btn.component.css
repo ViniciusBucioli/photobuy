@@ -1,0 +1,72 @@
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+  z-index: -1;
+  color: #f44336;
+
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.wrapper:focus,
+.wrapper:hover {
+  background-color: #fcf2f1;
+}
+
+.wrapper mat-icon {
+  margin-right: 5px;
+}
+
+.wrapper > label {
+  margin-bottom: 0;
+}
+.wrapper mat-icon {
+  vertical-align: middle;
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.wrapper {
+  font-size: 1em;
+  font-weight: 700;
+  color: #f44336;
+  display: inline-block;
+  line-height: 36px;
+  text-align: center;
+  background-color: white;
+	cursor: pointer; /* "hand" cursor */
+
+  box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 5px 16px;
+    border-radius: 4px;
+    overflow: visible;
+}
+
+.mini-img {
+    width: 50px;
+}

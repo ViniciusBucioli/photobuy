@@ -1,4 +1,7 @@
 <?php
+
+require '../header.php';
+
 $target_dir = "../../assets/img/";
 $img = $_FILES["productImg"];
 $target_file = $target_dir . basename($img["name"]);

@@ -34,6 +34,18 @@ import { ServicoComponent } from './cruds/servico/servico.component';
 import { VendaComponent } from './cruds/venda/venda.component';
 import { FuncionarioComponent } from './cruds/funcionario/funcionario.component';
 import { HeaderComponent } from './header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatProgressBarModule } from '@angular/material';
+import { ModalComponent } from './modal/modal.component';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Globals } from './globals';
+import { ImageModalComponent } from './modal/image-modal/image-modal.component';
+import { UploadBtnComponent } from './image/upload-btn/upload-btn.component';
 
 @NgModule({
   declarations: [
@@ -65,15 +77,32 @@ import { HeaderComponent } from './header/header.component';
     PortifolioComponent,
     ServicoComponent,
     VendaComponent,
-    FuncionarioComponent
+    FuncionarioComponent,
+    ModalComponent,
+    ImageModalComponent,
+    UploadBtnComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    NgbActiveModal,
+    Globals
+  ],
+  entryComponents: [
+      ModalComponent,
+      ImageModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

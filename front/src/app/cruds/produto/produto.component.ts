@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector, Inject, PLATFORM_ID } from '@angular/core';
 import { ProdutoModel } from '../models/produto-model..model';
 import { ProdutoService } from './produto.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Globals } from '../../globals';
+import { isPlatformBrowser } from '@angular/common';
+import { ImageModalComponent } from '../../modal/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-produto',
@@ -13,16 +17,19 @@ export class ProdutoComponent implements OnInit {
     public selectedToEdit: number;
     public newProduto: ProdutoModel;
     public selectedImgFile: File;
+    public activeImgModal: number;
 
     constructor(
-        private produtoService: ProdutoService
+        private modalService: NgbModal,
+        private produtoService: ProdutoService,
+        public globals: Globals
     ) { }
 
     ngOnInit() {
         this.getProdutos();
     }
 
-    private getProdutos(){
+    private getProdutos() {
         this.produtoService.search('').subscribe(
             (produtos: Array<ProdutoModel>) => {
                 this.produtos = produtos;
@@ -34,31 +41,36 @@ export class ProdutoComponent implements OnInit {
     public createProduto() {
         this.newProduto = new ProdutoModel();
     }
-    public insertProduto() {
-        this.produtoService.insert(this.newProduto).subscribe(
-            () => {
-                this.newProduto = null;
-                this.getProdutos();
+    public async insertProduto() {
+        this.newProduto.img = this.selectedImgFile.name;
+        let _insertProduto = true;
+        await this.produtoService.postImg(this.selectedImgFile).toPromise().then(
+            (e: any) => {
+                debugger;
+                console.log("sucess");
             },
-            this.defaultError
-        )
+            (e: any) =>{
+                _insertProduto = false;
+            }
+        );
+        if (_insertProduto) {
+            await this.produtoService.insert(this.newProduto).toPromise().then(
+                () => {
+                    this.newProduto = null;
+                    this.getProdutos();
+                },
+                this.defaultError
+            );
+        }
     }
 
     public async updateProduto(produto: ProdutoModel) {
-        // await this.produtoService.update(produto).toPromise().then(
-        //     (e: any) => {
-        //         this.selectedToEdit = 0;
-        //         this.getProdutos();
-        //     },
-        //     this.defaultError
-        // );
-        await this.produtoService.postImg(this.selectedImgFile).toPromise().then(
-          (result: boolean) => {
-              if (result) {
-                  debugger;
-                  console.log("sucess");
-              }
-          }
+        this.produtoService.update(produto).toPromise().then(
+            (e: any) => {
+                this.selectedToEdit = 0;
+                this.getProdutos();
+            },
+            this.defaultError
         );
     }
 
@@ -77,6 +89,12 @@ export class ProdutoComponent implements OnInit {
 
     public handleFileInput(files: any) {
       this.selectedImgFile = files.item(0);
+    }
+
+    public openImgModal(produto: ProdutoModel) {
+        const modalRef = this.modalService.open(ImageModalComponent);
+        modalRef.componentInstance.title = produto.nome;
+        modalRef.componentInstance.img = produto.img;
     }
 
 }

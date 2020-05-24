@@ -36,7 +36,9 @@ export class PhpService {
     }
     private errorLog = (e: any) => {
       console.log(e);
-      if (e.error.message) {
+      if ((typeof e.error) === 'string') {
+        this.notification.popNotification(e.error);
+      } else if (e.error.message) {
         this.notification.popNotification(e.error.message);
       } else {
         this.notification.popNotification(e.message);
