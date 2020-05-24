@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { NotificationService } from './notification.service';
+import { FunctionsService } from './functions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class PhpService {
 
     constructor(
         private httpClient: HttpClient,
-        private notification: NotificationService
+        private notification: NotificationService,
+        private functions: FunctionsService
     ) {
         this.headers = {headers: new HttpHeaders({'Content-Type':'application/json; charset=utf-8'}) };
     }
@@ -23,7 +25,7 @@ export class PhpService {
         .pipe(tap(() => {}, this.errorLog));
     }
     public post<T>(url: string, body: any): Observable<any> {
-        return this.httpClient.post(url, this.toHttp(body))
+        return this.httpClient.post(url, this.functions.objectToFormData(body))
         .pipe(tap(() => {}, this.errorLog));
     }
     public put<T>(url: string, body: any): Observable<any> {

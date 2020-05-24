@@ -23,9 +23,9 @@
         public function setDescricao($descricao) { $this->descricao = $descricao; }
         public function getDescricao() { return $this->descricao; }
 
-        private $img;
-        public function setImg($img) { $this->img = $img; }
-        public function getImg() { return $this->img; }
+        private $imgPath;
+        public function setImg($imgPath) { $this->imgPath = $imgPath; }
+        public function getImg() { return $this->imgPath; }
 
         private $conn;
         function __construct(){
@@ -34,16 +34,16 @@
         }
 
 
-        //está funcionando
         public function cadastrar() {
-            if($query = $this->conn->prepare('INSERT INTO Produto (nome, categoria, preco, descricao, img) VALUES (?, ?, ?, ?, ?);')){
-                $query->bind_param('sssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->img);
+            if($query = $this->conn->prepare('INSERT INTO Produto (nome, categoria, preco, descricao, imgPath) VALUES (?, ?, ?, ?, ?);')){
+                $query->bind_param('sssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath);
                 $result = $query->execute();
-                if($result)
-                    return true;
-                else
-                    return false;
                 $this->conn->close();
+                if ($result) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
                 return $error;
@@ -51,8 +51,8 @@
         }
         
         public function atualizar() {
-            if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ?, img = ? WHERE id = ?')){
-                $query->bind_param('ssssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->img, $this->id);
+            if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ?, imgPath = ? WHERE id = ?')){
+                $query->bind_param('ssssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath, $this->id);
                 $result = $query->execute();
                 if($result)
                     return true;

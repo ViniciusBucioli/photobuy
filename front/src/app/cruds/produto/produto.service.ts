@@ -26,11 +26,11 @@ export class ProdutoService {
     }
 
     public postImg(fileToUpload: File): Observable<any> {
-      const endpoint = 'http://localhost:5500/controller/produto/InserirImagem.php';
+      const url = 'http://localhost:5500/controller/produto/InserirImagem.php';
       const formData: FormData = new FormData();
       formData.append('productImg', fileToUpload, fileToUpload.name);
       return this.httpClient
-        .post(endpoint, formData);
+        .post(url, formData);
   }
 
     public update(produto: ProdutoModel): Observable<ProdutoModel> {

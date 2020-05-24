@@ -1,6 +1,7 @@
 <?php
     require_once '../../model/ProdutoModel.php';
     require '../header.php';
+    require '../InserirImagem.php';
 
     if($_SERVER['REQUEST_METHOD'] != 'POST') {
         // Bad request
@@ -26,14 +27,24 @@
     $categoria = $_POST['categoria'];
     $preco = $_POST['preco'];
     $descricao = $_POST['descricao'];
-    $img = $_POST['img'];
+    if (isset($_FILES['imgFile'])) {
+        $path = 'Produtos/';
+        $imgPath = $path . $_FILES['imgFile']['name'];
+        $errorMessage = InsertImg($_FILES['imgFile'], $path);
+        if ($errorMessage != null) {
+            echo $errorMessage;
+            exit();
+        }
+    } else {
+        $imgPath = null;
+    }
 
     $produtoModel = new ProdutoModel();
     $produtoModel->setNome($nome);
     $produtoModel->setCategoria($categoria);
     $produtoModel->setPreco($preco);
     $produtoModel->setDescricao($descricao);
-    $produtoModel->setImg($img);
+    $produtoModel->setImg($imgPath);
 
     if($produtoModel->cadastrar()){
         // Produto criado

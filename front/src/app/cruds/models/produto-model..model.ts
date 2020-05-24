@@ -5,6 +5,7 @@ export class ProdutoModel {
     public categoria: string;
     public preco: number;
     public descricao: string;
-    public img: string;
+    public imgPath: string;
+    public imgFile: File;
 
 }

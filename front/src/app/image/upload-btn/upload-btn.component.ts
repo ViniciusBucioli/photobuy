@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-img-upload-btn',
@@ -8,11 +7,16 @@ import { EventEmitter } from 'protractor';
 })
 export class UploadBtnComponent implements OnInit {
 
-    @Input() img: File;
-    @Output() ImgSelect = new EventEmitter();
+    public img: File;
+    @Output() imgSelect = new EventEmitter();
     constructor() { }
 
     ngOnInit() {
+    }
+
+    public handleFileInput(files: any) {
+        this.img = files.item(0);
+        this.imgSelect.emit(this.img);
     }
 
 }

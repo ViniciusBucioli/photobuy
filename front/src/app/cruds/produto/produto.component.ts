@@ -42,26 +42,16 @@ export class ProdutoComponent implements OnInit {
         this.newProduto = new ProdutoModel();
     }
     public async insertProduto() {
-        this.newProduto.img = this.selectedImgFile.name;
-        let _insertProduto = true;
-        await this.produtoService.postImg(this.selectedImgFile).toPromise().then(
-            (e: any) => {
-                debugger;
-                console.log("sucess");
-            },
-            (e: any) =>{
-                _insertProduto = false;
-            }
-        );
-        if (_insertProduto) {
-            await this.produtoService.insert(this.newProduto).toPromise().then(
-                () => {
-                    this.newProduto = null;
-                    this.getProdutos();
-                },
-                this.defaultError
-            );
+        if (this.selectedImgFile) {
+            this.newProduto.imgFile = this.selectedImgFile;
         }
+        await this.produtoService.insert(this.newProduto).toPromise().then(
+            () => {
+                this.newProduto = null;
+                this.getProdutos();
+            },
+            this.defaultError
+        );
     }
 
     public async updateProduto(produto: ProdutoModel) {
@@ -87,14 +77,14 @@ export class ProdutoComponent implements OnInit {
         console.error(e);
     }
 
-    public handleFileInput(files: any) {
-      this.selectedImgFile = files.item(0);
+    public handleFileInput(files: File) {
+        this.selectedImgFile = files;
     }
 
     public openImgModal(produto: ProdutoModel) {
         const modalRef = this.modalService.open(ImageModalComponent);
         modalRef.componentInstance.title = produto.nome;
-        modalRef.componentInstance.img = produto.img;
+        modalRef.componentInstance.img = produto.imgPath;
     }
 
 }
