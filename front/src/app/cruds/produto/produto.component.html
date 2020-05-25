@@ -72,12 +72,7 @@
                                 <td><input type="number" class="form-control" [(ngModel)]="produto.preco" name="preco" /></td>
                                 <td><input type="text" class="form-control" [(ngModel)]="produto.descricao" name="descricao" /></td>
                                 <td>
-                                    <ng-template [ngIf]="!produto.imgFile">
-                                        <app-img-upload-btn (ImgSelect)="handleFileInput($event)"></app-img-upload-btn>
-                                    </ng-template>
-                                    <ng-template [ngIf]="produto.imgFile">
-                                        {{ produto.imgPath }}
-                                    </ng-template>
+                                    <app-img-upload-btn (imgSelect)="handleFileInput($event)"></app-img-upload-btn>
                                 </td>
                             </ng-template>
 

@@ -1,7 +1,7 @@
 <?php
     require_once '../../model/ProdutoModel.php';
     require '../header.php';
-    require '../InserirImagem.php';
+    require '../../Managers/ImageManager.php';
 
     if($_SERVER['REQUEST_METHOD'] != 'POST') {
         // Bad request
@@ -28,13 +28,9 @@
     $preco = $_POST['preco'];
     $descricao = $_POST['descricao'];
     if (isset($_FILES['imgFile'])) {
-        $path = 'Produtos/';
-        $imgPath = $path . $_FILES['imgFile']['name'];
-        $errorMessage = InsertImg($_FILES['imgFile'], $path);
-        if ($errorMessage != null) {
-            echo $errorMessage;
-            exit();
-        }
+        $file = $_FILES['imgFile'];
+        $imageManager = new ImageManager();
+        $imgPath = $imageManager->InsertProductImg($file);
     } else {
         $imgPath = null;
     }

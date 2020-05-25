@@ -82,6 +82,42 @@
             }
 
         }
+
+        public function get($id) {
+            if($query = $this->conn->prepare('SELECT * FROM Produto WHERE id = ?')) {
+                $query->bind_param("d", $id);
+                $query->execute();
+
+                $result = $query->get_result();
+                $this->conn->close();
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $this->set($row);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                $error = $this->conn->errno . ' ' . $this->conn->error;
+                return $error;
+            }
+        }
+
+        private function set($row) {
+            $this->id = $row['id'];
+            $this->nome = $row['nome'];
+            $this->categoria = $row['categoria'];
+            $this->preco = $row['preco'];
+            $this->descricao = $row['descricao'];
+            $this->imgPath = $row['imgPath'];
+        }
+
+        public function getNextId() {
+            $query = $this->conn->prepare('SELECT MAX(id) as result FROM Produto');
+            $query->execute();
+            $result = $query->get_result();
+            return $result->fetch_assoc()['result'] + 1;
+        }
         
         public function searchByNome($word) {
             $word = '%'.$word.'%';
@@ -91,7 +127,6 @@
                 $query->execute();
 
                 $result = $query->get_result();
-                //echo $result;
                 if ($result->num_rows > 0) {
                     $rows = [];
                     while($row = $result->fetch_assoc()) {

@@ -55,6 +55,9 @@ export class ProdutoComponent implements OnInit {
     }
 
     public async updateProduto(produto: ProdutoModel) {
+        if (this.selectedImgFile) {
+            produto.imgFile = this.selectedImgFile;
+        }
         this.produtoService.update(produto).toPromise().then(
             (e: any) => {
                 this.selectedToEdit = 0;
@@ -77,8 +80,8 @@ export class ProdutoComponent implements OnInit {
         console.error(e);
     }
 
-    public handleFileInput(files: File) {
-        this.selectedImgFile = files;
+    public handleFileInput(file: File) {
+        this.selectedImgFile = file;
     }
 
     public openImgModal(produto: ProdutoModel) {

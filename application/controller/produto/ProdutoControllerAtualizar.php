@@ -1,6 +1,7 @@
 <?php
     require_once '../../model/ProdutoModel.php';
     require '../header.php';
+    require '../../Managers/ImageManager.php';
     
     if(
         empty($_POST['id']) ||
@@ -20,7 +21,16 @@
     $categoria = $_POST['categoria'];
     $preco = $_POST['preco'];
     $descricao = $_POST['descricao'];
-    $imgPath = $_POST['img'];
+
+    if (isset($_FILES['imgFile'])) {
+
+        $file = $_FILES['imgFile'];
+        $imageManager = new ImageManager();
+
+        $imgPath = $imageManager->UpdateProductImg($id, $file);
+    } else {
+        $imgPath = null;
+    }
 
     $produtoModel = new ProdutoModel();
     $produtoModel->setId($id);

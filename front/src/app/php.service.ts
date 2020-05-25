@@ -29,7 +29,7 @@ export class PhpService {
         .pipe(tap(() => {}, this.errorLog));
     }
     public put<T>(url: string, body: any): Observable<any> {
-        return this.httpClient.post(url, this.toHttp(body))
+        return this.httpClient.post(url, this.functions.objectToFormData(body))
         .pipe(tap(() => {}, this.errorLog));
     }
     public delete<T>(url: string, id: number): Observable<any> {
@@ -40,7 +40,9 @@ export class PhpService {
       console.log(e);
       if ((typeof e.error) === 'string') {
         this.notification.popNotification(e.error);
-      } else if (e.error.message) {
+      } else if (typeof e.error.text === 'string') {
+        this.notification.popNotification(e.error.text);
+      }else if (e.error.message) {
         this.notification.popNotification(e.error.message);
       } else {
         this.notification.popNotification(e.message);
