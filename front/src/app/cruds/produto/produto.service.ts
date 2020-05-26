@@ -25,13 +25,13 @@ export class ProdutoService {
         return this.phpService.post(`http://localhost:5500/controller/produto/ProdutoControllerCadastro.php`, produto);
     }
 
-    public postImg(fileToUpload: File): Observable<any> {
-      const url = 'http://localhost:5500/controller/produto/InserirImagem.php';
-      const formData: FormData = new FormData();
-      formData.append('productImg', fileToUpload, fileToUpload.name);
-      return this.httpClient
-        .post(url, formData);
-  }
+    // public postImg(fileToUpload: File): Observable<any> {
+    //   const url = 'http://localhost:5500/controller/produto/InserirImagem.php';
+    //   const formData: FormData = new FormData();
+    //   formData.append('productImg', fileToUpload, fileToUpload.name);
+    //   return this.httpClient
+    //     .post(url, formData);
+    // }
 
     public update(produto: ProdutoModel): Observable<ProdutoModel> {
         return this.phpService.put(`http://localhost:5500/controller/produto/ProdutoControllerAtualizar.php`, produto);

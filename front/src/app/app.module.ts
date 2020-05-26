@@ -46,6 +46,8 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Globals } from './globals';
 import { ImageModalComponent } from './modal/image-modal/image-modal.component';
 import { UploadImgBtnComponent } from './image/upload-btn/upload-img-btn.component';
+import { ProdutoClientViewComponent } from './cliente/produto-client-view/produto-client-view.component';
+import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-detail/produto-detail.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import { UploadImgBtnComponent } from './image/upload-btn/upload-img-btn.compone
     FuncionarioComponent,
     ModalComponent,
     ImageModalComponent,
-    UploadImgBtnComponent
+    UploadImgBtnComponent,
+    ProdutoClientViewComponent,
+    ProdutoDetailComponent
   ],
   imports: [
     BrowserModule,

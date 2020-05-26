@@ -15,6 +15,7 @@ import { FuncionarioCatalogoComponent } from './funcionario/portifolio/funcionar
 import { FuncionarioPedidosComponent } from './funcionario/portifolio/funcionario-pedidos/funcionario-pedidos.component';
 import { FuncionarioProdutoComponent } from './funcionario/portifolio/funcionario-produto/funcionario-produto.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-detail/produto-detail.component';
 
 const routes: Routes = [
     {
@@ -27,11 +28,21 @@ const routes: Routes = [
     },
     {
         path: 'cliente',
-        component: ClienteComponent
+        children: [{
+            path: '',
+            component: ClienteComponent
+        },
+        {
+            path: 'product',
+            children: [{
+                path: ':id',
+                component: ProdutoDetailComponent
+            }]
+        }]
     },
     {
         path: 'funcionario',
-        children:[{
+        children: [{
             path: '',
             component: FuncionarioMenuComponent,
         },

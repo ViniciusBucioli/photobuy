@@ -1,0 +1,35 @@
+
+
+<div class="intro mb-2">
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Produtos</span>
+                    </div><input type="search" class="form-control" [(ngModel)]="searchWord" name="searchWord"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" (click)="getProdutos()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row photos mt-4">
+    <ng-template ngFor let-produto [ngForOf]="produtos">
+        <div class="col-sm-6 col-md-4 col-lg-3 text-center item">
+            <a data-lightbox="photos" [routerLink]="'./product/' + produto.id">
+                <ng-template [ngIf]="produto.imgPath">
+                    <img class="img-fluid img-thumbnail" height="200px" [src]="globals.imagePath + produto.imgPath"/>
+                </ng-template>
+                <ng-template [ngIf]="!produto.imgPath">
+                    <img class="img-fluid img-thumbnail" height="200px" [src]="globals.imagePath + 'nophoto_thumbnail.png'"/>
+                </ng-template>
+            </a>
+            <span> {{ produto.nome }}</span>
+        </div>
+    </ng-template>
+</div>
