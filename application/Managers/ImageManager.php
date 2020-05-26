@@ -49,7 +49,7 @@ class ImageManager {
         $path = 'Produtos/';
         $product = new ProdutoModel();
         $id = $product->getNextId();
-        $img['name'] = 'Produto'. $id;
+        $img['name'] = 'Produto' . $id . '-' . $img['name'];
         return $this->InsertImg($img, $path);
     }
 

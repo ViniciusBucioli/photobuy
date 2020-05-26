@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-img-upload-btn',
-  templateUrl: './upload-btn.component.html',
-  styleUrls: ['./upload-btn.component.css']
+  templateUrl: './upload-img-btn.component.html',
+  styleUrls: ['./upload-img-btn.component.css']
 })
-export class UploadBtnComponent implements OnInit {
+export class UploadImgBtnComponent implements OnInit {
 
     public img: File;
     @Output() imgSelect = new EventEmitter();
