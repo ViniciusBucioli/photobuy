@@ -1,5 +1,5 @@
 <?php
-    require_once '../../model/ClienteModel.php.php';
+    require_once '../../model/ClienteModel.php';
     require '../header.php';
 
     if(
@@ -16,20 +16,20 @@
         exit();
     }
     $id = $_POST['id'];
-    $CPF = $_POST['CPF'];
-    $nome_cliente = $_POST['Nome'];
-    $email_cliente = $_POST['Email'];
-    $telefone_cliente = $_POST['Telefone'];
-    $endereco_cliente = $_POST['Endereco'];
+    $cpf = $_POST['CPF'];
+    $nome = $_POST['Nome'];
+    $email = $_POST['Email'];
+    $telefone = $_POST['Telefone'];
+    $endereco = $_POST['Endereco'];
 
-    $clienteModel = new ClienteModel();
-    $cliente->setCpf($contato);
+    $cliente = new ClienteModel();
+    $cliente->setCpf($cpf);
     $cliente->setNome($nome);
     $cliente->setEmail($email);
     $cliente->setTelefone($telefone);
     $cliente->setEndereco($endereco);
 
-    if($produto->atualizar()) {
+    if($cliente->atualizar()) {
 
         // Produto criado
         http_response_code(200);

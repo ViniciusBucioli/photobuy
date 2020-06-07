@@ -14,7 +14,7 @@
         empty($_POST['CPF']) ||
         empty($_POST['Nome']) ||
         empty($_POST['Email']) ||
-        empty($_POST['Telefone'])&&
+        empty($_POST['Telefone']) ||
         empty($_POST['Endereco'])
     ) {
         // Bad request
