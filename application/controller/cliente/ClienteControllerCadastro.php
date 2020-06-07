@@ -1,5 +1,5 @@
 <?php
-    require_once '../../model/ClienteModel.php.php';
+    require_once '../../model/ClienteModel.php';
     require '../header.php';
 
     if($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -11,6 +11,7 @@
     }
     
     if(
+        empty($_POST['username']) ||
         empty($_POST['CPF']) ||
         empty($_POST['Nome']) ||
         empty($_POST['Email']) ||
@@ -23,14 +24,16 @@
         exit();
     }
 
-    $CPF = $_POST['CPF'];
-    $nome_cliente = $_POST['Nome'];
-    $email_cliente = $_POST['Email'];
-    $telefone_cliente = $_POST['Telefone'];
-    $endereco_cliente = $_POST['Endereco'];
+    $user_name = $_POST['username'];
+    $cpf = $_POST['CPF'];
+    $nome = $_POST['Nome'];
+    $email = $_POST['Email'];
+    $telefone = $_POST['Telefone'];
+    $endereco = $_POST['Endereco'];
 
     $novoCliente = new ClienteModel();
-    $novoCliente->setCpf($contato);
+    $novoCliente->setUserName($user_name);
+    $novoCliente->setCpf($cpf);
     $novoCliente->setNome($nome);
     $novoCliente->setEmail($email);
     $novoCliente->setTelefone($telefone);
@@ -40,7 +43,7 @@
         // Produto criado
         http_response_code(201);
         // tell the user
-        echo json_encode(array("message" => "Produto criado."));
+        echo json_encode(array("message" => "Cliente cadastrado."));
     }else{
         // set response code - 503 service unavailable
         http_response_code(503);

@@ -2,8 +2,8 @@
 -- mysql -h localhost -u root -p fotobuy
 
 start transaction;
+drop schema fotobuy;
 create schema fotobuy;
--- drop schema fotobuy;
 use fotobuy;
 -- Table: Aluguel_Produto
 CREATE TABLE Aluguel_Produto (
@@ -17,11 +17,12 @@ CREATE TABLE Aluguel_Produto (
 -- Table: Cliente
 CREATE TABLE Cliente (
 	id int (5) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username NVARCHAR(10),
     CPF int (12) NOT NULL,
     nome TEXT (100) NOT NULL,
     email TEXT (50) NOT NULL,
-    telefone int (15) NOT NULL,
-    endereco TEXT (200) NOT NULL);
+    telefone int (15) NULL,
+    endereco TEXT (200) NULL);
 
 -- Table: Estoque
 CREATE TABLE Estoque (
@@ -68,9 +69,9 @@ CREATE TABLE Produto (
       preco int NOT NULL, 
       descricao TEXT (200) NOT NULL,
       img nvarchar(1000) NULL);
-insert into produto values (default, "Câmera Nikom 15200", "Camera", 1200, "Câmera Nikom com alta qualidade");
-insert into produto values (default, "Tripe", "Acessorios", 300, "Tripe para camera, altura máxima 2.5 m");
-insert into produto values (default, "Pano verde", "Estudio", 200, "Pano verde para o plano de fundo 5m x 5m");
+-- insert into produto values (default, "Câmera Nikom 15200", "Camera", 1200, "Câmera Nikom com alta qualidade");
+-- insert into produto values (default, "Tripe", "Acessorios", 300, "Tripe para camera, altura máxima 2.5 m");
+-- insert into produto values (default, "Pano verde", "Estudio", 200, "Pano verde para o plano de fundo 5m x 5m");
 
 -- Table: Servico
 CREATE TABLE Servico (

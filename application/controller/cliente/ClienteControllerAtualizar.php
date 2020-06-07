@@ -4,6 +4,7 @@
 
     if(
         empty($_POST['id']) ||
+        empty($_POST['username']) ||
         empty($_POST['CPF']) ||
         empty($_POST['Nome']) ||
         empty($_POST['Email']) ||
@@ -16,6 +17,7 @@
         exit();
     }
     $id = $_POST['id'];
+    $user_name = $_POST['username'];
     $cpf = $_POST['CPF'];
     $nome = $_POST['Nome'];
     $email = $_POST['Email'];
@@ -23,6 +25,8 @@
     $endereco = $_POST['Endereco'];
 
     $cliente = new ClienteModel();
+    $cliente->setId($id);
+    $cliente->setUserName($user_name);
     $cliente->setCpf($cpf);
     $cliente->setNome($nome);
     $cliente->setEmail($email);
