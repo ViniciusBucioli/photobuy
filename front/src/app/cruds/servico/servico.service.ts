@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ServicoModel } from '../models/servico-model..model';
+import { ServicoModel } from '../models/servico-model.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PhpService } from '../../php.service';

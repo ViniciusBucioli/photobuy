@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EstoqueModel } from '../models/estoque-model..model';
+import { EstoqueModel } from '../models/estoque-model.model';
 import { EstoqueService } from './estoque.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PontoModel } from '../models/ponto-model..model';
+import { PontoModel } from '../models/ponto-model.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PhpService } from '../../php.service';

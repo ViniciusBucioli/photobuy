@@ -16,6 +16,7 @@ import { FuncionarioPedidosComponent } from './funcionario/portifolio/funcionari
 import { FuncionarioProdutoComponent } from './funcionario/portifolio/funcionario-produto/funcionario-produto.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-detail/produto-detail.component';
+import { NewAccountComponent } from './login/new-account/new-account.component';
 
 const routes: Routes = [
     {
@@ -92,8 +93,12 @@ const routes: Routes = [
         }]
     },
     {
-        path:'login',
+        path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'new-account',
+        component: NewAccountComponent
     }
 ];
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../../cruds/produto/produto.service';
-import { ProdutoModel } from '../../cruds/models/produto-model..model';
+import { ProdutoModel } from '../../cruds/models/produto-model.model';
 import { Globals } from '../../globals';
 
 @Component({

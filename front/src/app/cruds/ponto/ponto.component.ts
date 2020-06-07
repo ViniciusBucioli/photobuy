@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PontoModel } from '../models/ponto-model..model';
+import { PontoModel } from '../models/ponto-model.model';
 import { PontoService } from './ponto.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicoModel } from '../models/servico-model..model';
+import { ServicoModel } from '../models/servico-model.model';
 import { ServicoService } from './servico.service';
 
 @Component({

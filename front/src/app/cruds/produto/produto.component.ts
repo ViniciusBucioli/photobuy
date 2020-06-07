@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, Inject, PLATFORM_ID } from '@angular/core';
-import { ProdutoModel } from '../models/produto-model..model';
+import { ProdutoModel } from '../models/produto-model.model';
 import { ProdutoService } from './produto.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Globals } from '../../globals';

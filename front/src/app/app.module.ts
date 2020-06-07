@@ -48,6 +48,7 @@ import { ImageModalComponent } from './modal/image-modal/image-modal.component';
 import { UploadImgBtnComponent } from './image/upload-btn/upload-img-btn.component';
 import { ProdutoClientViewComponent } from './cliente/produto-client-view/produto-client-view.component';
 import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-detail/produto-detail.component';
+import { NewAccountComponent } from './login/new-account/new-account.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-de
     ImageModalComponent,
     UploadImgBtnComponent,
     ProdutoClientViewComponent,
-    ProdutoDetailComponent
+    ProdutoDetailComponent,
+    NewAccountComponent
   ],
   imports: [
     BrowserModule,

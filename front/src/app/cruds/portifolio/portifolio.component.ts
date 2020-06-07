@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PortifolioModel } from '../models/portifolio-model..model';
+import { PortifolioModel } from '../models/portifolio-model.model';
 import { PortifolioService } from './portifolio.service';
 
 @Component({

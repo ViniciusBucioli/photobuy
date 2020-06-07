@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FuncionarioModel } from '../models/funcionario-model..model';
+import { FuncionarioModel } from '../models/funcionario-model.model';
 import { FuncionarioService } from './funcionario.service';
 
 @Component({

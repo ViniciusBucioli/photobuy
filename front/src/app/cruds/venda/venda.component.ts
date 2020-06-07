@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VendaModel } from '../models/venda-model..model';
+import { VendaModel } from '../models/venda-model.model';
 import { VendaService } from './venda.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AluguelModel } from '../models/aluguel-model..model';
+import { AluguelModel } from '../models/aluguel-model.model';
 import { AluguelService } from './aluguel.service';
 
 
