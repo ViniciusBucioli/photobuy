@@ -2,36 +2,40 @@
     require_once '../../model/ClienteModel.php';
     require '../header.php';
 
+    if($_SERVER['REQUEST_METHOD'] != 'PUT') {
+        // Bad request
+        http_response_code(400);
+        
+        echo json_encode(array("message" => "Apenas PUT."));
+        exit();
+    }
     if(
-        empty($_POST['id']) ||
-        empty($_POST['username']) ||
-        empty($_POST['CPF']) ||
-        empty($_POST['Nome']) ||
-        empty($_POST['Email']) ||
-        empty($_POST['Telefone']) &&
-        empty($_POST['Endereco'])
+        empty($_PUT['id']) ||
+        empty($_PUT['endereco']) ||
+        empty($_PUT['name']) ||
+        empty($_PUT['email']) ||
+        empty($_PUT['password']) ||
+        empty($_PUT['tel']) 
     ) {
         // Bad request
         http_response_code(400);
         echo json_encode(array("message" => "Dados incompletos."));
         exit();
     }
-    $id = $_POST['id'];
-    $user_name = $_POST['username'];
-    $cpf = $_POST['CPF'];
-    $nome = $_POST['Nome'];
-    $email = $_POST['Email'];
-    $telefone = $_POST['Telefone'];
-    $endereco = $_POST['Endereco'];
+    $id = $_PUT['id'];
+    $endereco = $_PUT['endereco'];
+    $nome = $_PUT['name'];
+    $email = $_PUT['email'];
+    $password = $_PUT['password'];
+    $tel = $_PUT['tel'];
 
     $cliente = new ClienteModel();
     $cliente->setId($id);
-    $cliente->setUserName($user_name);
-    $cliente->setCpf($cpf);
+    $cliente->setEndereco($endereco);
     $cliente->setNome($nome);
     $cliente->setEmail($email);
-    $cliente->setTelefone($telefone);
-    $cliente->setEndereco($endereco);
+    $cliente->setTel($tel);
+    $cliente->setPass($password);
 
     if($cliente->atualizar()) {
 

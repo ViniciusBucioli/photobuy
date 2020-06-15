@@ -1,16 +1,22 @@
 <?php
-    require_once '../model/ClienteModel.php';
+    require_once '../../model/ClienteModel.php';
 
     header("Access-Control-Allow-Origin: *");
-    // $cpf = $_POST['CPF'];
-    // $nome = $_POST['Nome'];
-    $word = $_GET['word'];
+    if(isset($_GET['word'])) {
+        $word = $_GET['word'];
+    } else {
+        $word = '';
+    }
 
     $clienteModel = new ClienteModel();
-    $searchResult = $clienteModel->searchByName($word);
-    if($searchResult == false)
-        // header('');
-        echo 'error';
-    else
+    if($clienteModel->searchByName($word)){
+        echo $clienteModel->getResultJSON();
+    }
+    else{
         echo $searchResult;
+    }
+
+    
+
+
 ?>

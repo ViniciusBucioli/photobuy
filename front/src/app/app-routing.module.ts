@@ -17,6 +17,7 @@ import { FuncionarioProdutoComponent } from './funcionario/portifolio/funcionari
 import { ClienteComponent } from './cliente/cliente.component';
 import { ProdutoDetailComponent } from './cliente/produto-client-view/produto-detail/produto-detail.component';
 import { NewAccountComponent } from './login/new-account/new-account.component';
+import { CheckOutComponent } from './cliente/check-out/check-out.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,12 @@ const routes: Routes = [
                 path: ':id',
                 component: ProdutoDetailComponent
             }]
-        }]
+        },
+        {
+            path: 'checkout',
+            component: CheckOutComponent
+        }
+    ]
     },
     {
         path: 'funcionario',

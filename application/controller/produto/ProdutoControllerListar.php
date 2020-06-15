@@ -13,9 +13,5 @@
     // Alterei para searchByNome pois era a mesma coisa do method search no ProdutoModel
     $produtoModel = new ProdutoModel();
     $searchResult = $produtoModel->searchByNome($word);
-    if($searchResult == false)
-        //header('');
-        echo 'error';
-    else
-        echo $searchResult;
+    echo $searchResult;
 ?>

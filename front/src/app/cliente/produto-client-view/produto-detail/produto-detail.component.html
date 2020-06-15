@@ -1,3 +1,59 @@
-<p>
-  produto-detail works!
-</p>
+<app-header></app-header>
+<div class="row">
+    <div class="col">
+        <div class="container" *ngIf="product">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-center">{{ product.nome }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 text-center">
+                    <div class="row">
+                        <div class="col">
+                            <img class="big-img" [src]="'http://localhost:5500/assets/img/' + product.imgPath" width="500px"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Descrição</h4>
+                            <p>{{ product.descricao }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>Informação sobre o produto</h4>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col"><span>Preço do produto:</span></div>
+                                <div class="col text-right"><span class="text-left">{{ product.preco }}R$</span></div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col"><span>Frete:</span></div>
+                                <div class="col text-right"><span>3,00R$</span></div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col"><span>Total:</span></div>
+                                <div class="col text-right"><span>{{ product.preco + 3 }}R$</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col text-center"><button class="btn btn-primary" type="button" (click)="addItem()">Comprar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-cart-products class="col-3" *ngIf="clientCart.show"></app-cart-products>
+</div>

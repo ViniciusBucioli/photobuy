@@ -1,5 +1,4 @@
 <?php
-    require_once '../../model/LoginModel.php';
     require '../header.php';
 
     if($_SERVER['REQUEST_METHOD'] != 'GET') {
@@ -10,7 +9,9 @@
         exit();
     }
     
-    unset($_session['email']);
-    unset($_SESSION['pass']);
+    session_start();
+    if(isset($_SESSION['id'])) {
+        unset($_SESSION['id']);
+    }
     http_response_code(200);
 ?>

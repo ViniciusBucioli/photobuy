@@ -1,7 +1,10 @@
 <app-header></app-header>
 
-<div class="photo-gallery">
-    <div class="container mt-3">
-        <app-produto-client-view></app-produto-client-view>
+<div class="row">
+    <div class="photo-gallery col">
+        <div class="container mt-3">
+            <app-produto-client-view></app-produto-client-view>
+        </div>
     </div>
+    <app-cart-products class="col-3" *ngIf="clientCart.show"></app-cart-products>
 </div>

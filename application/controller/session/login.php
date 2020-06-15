@@ -1,6 +1,6 @@
 <?php
-    require_once '../../model/LoginModel.php';
     require '../header.php';
+    require_once '../../model/UserModel.php';
 
     if($_SERVER['REQUEST_METHOD'] != 'POST') {
         // Bad request
@@ -23,20 +23,19 @@
     $email = $_POST['email'];
     $pass = $_POST['pass'];
 
-    $login = new LoginModel();
-    $login->setEmail($email);
-    $login->setPass($pass);
-    $result = $login->login();
+    $user = new UserModel();
+    $user->setEmail($email);
+    $user->setPass($pass);
+    $result = $user->login();
 
     if($result["valid"]){
         
         http_response_code(200);
         
-        echo json_encode(array("message" => "Sucesso.", "valid" => "true", "path" => $result["path"]));
+        echo json_encode(array("message" => "Sucesso.", "valid" => true, "path" => $result["path"]));
     }
     else{
-        // set response code - 503 service unavailable
-        http_response_code(503);
-        echo json_encode(array("message" => "Credenciais inválidos.", "valid" => "false"));
+        http_response_code(200);
+        echo json_encode(array("message" => "Credenciais inválidos.", "valid" => false));
     }
 ?>

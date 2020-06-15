@@ -8,14 +8,6 @@
         public function setId($id) { $this->id = $id; }
         public function getId() { return $this->id; }
 
-        private $user_name;
-        public function setUserName($user_name) { $this->user_name = $user_name; }
-        public function getUserName() { return $this->user_name; }
-        
-        private $cpf;
-        public function setCpf($cpf) { $this->cpf = $cpf; }
-        public function getCpf() { return $this->cpf; }
-
         private $nome;
         public function setNome($nome) { $this->nome = $nome; }
         public function getNome() { return $this->nome; }
@@ -24,13 +16,37 @@
         public function setEmail($email) { $this->email = $email; }
         public function getEmail() { return $this->email; }
 
-        private $telefone;
-        public function setTelefone($telefone) { $this->telefone = $telefone; }
-        public function getTelefone() { return $this->telefone; }
+        private $tel;
+        public function setTel($telefone) { $this->tel = $telefone; }
+        public function getTel() { return $this->tel; }
 
         private $endereco;
         public function setEndereco($endereco) { $this->endereco = $endereco; }
         public function getEndereco() {return $this->endereco; }
+
+        private $pass;
+        public function setPass($pass) { $this->pass = $pass; }
+        public function getPass() { return $this->pass; }
+
+        public $error;
+
+        private $json;
+        public function getResultJSON() {
+            return $this->json;
+        }
+        public function getErrorJSON() {
+            return json_encode(
+                array(
+                    "error" => array($error),
+                    array(
+                        "nome" => $this->nome,
+                        "email" => $this->email,
+                        "tel" => $this->tel,
+                        "endereco" => $this->endereco,
+                        "pass" => $this->pass
+                        ))
+                    );
+        }
 
         private $conn;
         function __construct(){
@@ -40,8 +56,8 @@
 
         //testado e confirmado
         public function cadastrar() {
-            if($query = $this->conn->prepare('INSERT INTO Cliente (username, cpf, nome, email, telefone, endereco) VALUES (?, ?, ?, ?, ?, ?);')){
-            $query->bind_param("ssssss",$this->user_name, $this->cpf, $this->nome, $this->email, $this->telefone, $this->endereco);
+            if($query = $this->conn->prepare('INSERT INTO Cliente (nome, email, tel, endereco, pass) VALUES (?, ?, ?, ?, ?);')){
+            $query->bind_param("sssss", $this->nome, $this->email, $this->tel, $this->endereco, $this->pass);
             $runQuery = $query->execute();
             $this->conn->close();
             return $runQuery; //bool
@@ -52,11 +68,10 @@
         }
 
         public function atualizar() {
-            if($query = $this->conn->prepare('UPDATE Cliente SET username = ?, cpf = ?, nome = ?, email = ?, telefone = ?, endereco = ? WHERE id = ?')){
-                $query->bind_param('ssssssd', $this->user_name, $this->cpf, $this->nome, $this->email, $this->telefone, $this->endereco, $this->id);
+            if($query = $this->conn->prepare('UPDATE Cliente SET nome = ?, email = ?, tel = ?, endereco = ?, pass = ? WHERE id = ?')){
+                $query->bind_param('sssssd', $this->nome, $this->email, $this->telefone, $this->endereco, $this->pass, $this->id);
                 $result = $query->execute();
                 $this->conn->close();
-                echo $result;
                 return $result;
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
@@ -117,15 +132,15 @@
                 $query->execute();
 
                 $result = $query->get_result();
-                //echo $result;
                 if ($result->num_rows > 0) {
                     $rows = [];
                     while($row = $result->fetch_assoc()) {
                         $rows[] = $row;
                     }
-                    return json_encode(utf8size($rows));
+                    $this->json = json_encode(utf8size($rows));
+                    return true;
                 } else {
-                    return "";
+                    return false;
                 }
                 $this->conn->close();
             } else {

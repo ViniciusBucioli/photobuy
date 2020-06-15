@@ -31,7 +31,10 @@
               "src/assets/css/global-style.css",
               "node_modules/@syncfusion/ej2-notifications/styles/material.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/bootstrap/js/bootstrap.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

@@ -10,29 +10,14 @@
         exit();
     }
     
-    if(
-        empty($_SESSION['email']) ||
-        empty($_SESSION['pass'])
-    ) {
-        http_response_code(200);
-        echo json_encode(array("message" => "Credenciais inválidos.", "valid" => "false"));
-        exit();
-    }
-        
-    $email = $_SESSION['email'];
-    $pass = $_SESSION['pass'];
+    session_start();
 
-    $login = new LoginModel();
-    $login->setEmail($email);
-    $login->setPass($pass);
-    $result = $login->login();
-
-    if($result){
+    if(isset($_SESSION['id'])) {
         http_response_code(200);
-        echo json_encode(array("message" => "Sucesso.", "valid" => "true"));
+        echo json_encode(array("valid" => "true"));
     }
     else{
         http_response_code(200);
-        echo json_encode(array("message" => "Credenciais inválidos.", "valid" => "false"));
+        echo json_encode(array("valid" => "false"));
     }
 ?>

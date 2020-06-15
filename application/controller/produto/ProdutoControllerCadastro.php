@@ -22,7 +22,7 @@
         echo json_encode(array("message" => "Dados incompletos."));
         exit();
     }
-        
+    
     $nome = $_POST['nome'];
     $categoria = $_POST['categoria'];
     $preco = $_POST['preco'];
@@ -51,6 +51,6 @@
     else{
         // set response code - 503 service unavailable
         http_response_code(503);
-        echo json_encode(array("message" => "Não foi possível cria o produto."));
+        echo $produtoModel->getErrorJSON();
     }
 ?>

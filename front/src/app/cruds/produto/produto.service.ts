@@ -37,7 +37,11 @@ export class ProdutoService {
         return this.phpService.put(`http://localhost:5500/controller/produto/ProdutoControllerAtualizar.php`, produto);
     }
 
-    public delete(id: number): Observable<ProdutoModel> {
+    public delete(id: number): Observable<void> {
         return this.phpService.delete(`http://localhost:5500/controller/produto/ProdutoControllerDeletar.php`, id);
+    }
+
+    public getById(id: number): Observable<ProdutoModel> {
+        return this.phpService.get(`http://localhost:5500/controller/produto/ProdutoById.php?id=${id}`);
     }
 }

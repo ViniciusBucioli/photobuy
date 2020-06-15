@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Toast, ToastModel } from '@syncfusion/ej2-notifications'; 
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,9 @@ import { Toast, ToastModel } from '@syncfusion/ej2-notifications';
 export class NotificationService {
 
     private toastInstance: Toast;
-    constructor() {}
+    constructor(
+        private storage: SessionStorageService
+    ) {}
 
     public popNotification(message: string) {
         let element = document.createElement("div");
@@ -20,6 +23,16 @@ export class NotificationService {
           }
         this.toastInstance = new Toast(model, element);
         this.toastInstance.show();
+    }
 
+    public addNotification(notification: any) {
+        this.storage.addNotification(notification);
+    }
+
+    public getNotification() {
+        const notification =  this.storage.getNotification();
+        if (notification && notification.message) {
+            this.popNotification(notification.message);
+        }
     }
 }

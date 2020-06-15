@@ -11,12 +11,11 @@
     }
     
     if(
-        empty($_POST['username']) ||
-        empty($_POST['CPF']) ||
-        empty($_POST['Nome']) ||
-        empty($_POST['Email']) ||
-        empty($_POST['Telefone']) ||
-        empty($_POST['Endereco'])
+        empty($_POST['endereco']) ||
+        empty($_POST['name']) ||
+        empty($_POST['tel']) ||
+        empty($_POST['password']) ||
+        empty($_POST['email'])
     ) {
         // Bad request
         http_response_code(400);
@@ -24,20 +23,18 @@
         exit();
     }
 
-    $user_name = $_POST['username'];
-    $cpf = $_POST['CPF'];
-    $nome = $_POST['Nome'];
-    $email = $_POST['Email'];
-    $telefone = $_POST['Telefone'];
-    $endereco = $_POST['Endereco'];
+    $endereco = $_POST['endereco'];
+    $nome = $_POST['name'];
+    $tel = $_POST['tel'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
 
     $novoCliente = new ClienteModel();
-    $novoCliente->setUserName($user_name);
-    $novoCliente->setCpf($cpf);
     $novoCliente->setNome($nome);
     $novoCliente->setEmail($email);
-    $novoCliente->setTelefone($telefone);
+    $novoCliente->setTel($tel);
     $novoCliente->setEndereco($endereco);
+    $novoCliente->setPass($password);
 
     if($novoCliente->cadastrar()){
         // Produto criado

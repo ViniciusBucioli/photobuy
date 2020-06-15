@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { SessionStorageService } from '../session-storage.service';
 import { NotificationService } from '../notification.service';
+import { Observable } from 'rxjs';
 
 class User {
     email: string;
@@ -27,27 +28,18 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.notification.getNotification();
     }
 
     public login() {
         this.loginService.login(this.user.email, this.user.pass).subscribe(
             (response: any) => {
-                if (response.valid){
+                if (response.valid) {
                     this.router.navigateByUrl(response.path);
                 }
                 this.notification.popNotification(response.message);
-            }, 
-            (e: any) => {
-                console.log(e);
-                if (e.error.text){
-                    this.notification.popNotification(e.error.text);
-                }else if(e.error) {
-                    this.notification.popNotification(e.error.message);
-                } else {
-                    this.notification.popNotification(e.message);
-                }
             }
-        )
+        );
     }
 
 }

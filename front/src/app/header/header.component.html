@@ -10,11 +10,12 @@
                 <li class="nav-item" role="presentation"></li>
                 <li class="nav-item ml-2" role="presentation">
                     <button
-                        routerLink="/user/concluidos"
+                        (click)="toggleCartView()"
                         class="btn btn-primary d-xl-flex align-items-xl-center"
                         id="enter-btn"
                         type="button">
                         <i class="fas fa-shopping-cart header-icons"></i>
+                        <i *ngIf="cartItem.length" class="ml-2">{{ cartItem.length }}</i>
                     </button>
                 </li>
                 <li class="nav-item ml-2" role="presentation"></li>
@@ -30,9 +31,9 @@
                             <i class="fa fa-user-circle header-icons"></i>
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" routerLink="/user-account" *ngIf="router.url !== '/user-account'">Meus dados</a>
-                          <a class="dropdown-item" routerLink="/user" *ngIf="router.url !== '/app'">Página principal</a>
-                          <a class="dropdown-item" routerLink="/">Sair</a>
+                          <!-- <a class="dropdown-item" routerLink="/user-account" *ngIf="router.url !== '/user-account'">Meus dados</a>
+                          <a class="dropdown-item" routerLink="/user" *ngIf="router.url !== '/app'">Página principal</a> -->
+                          <a class="dropdown-item" routerLink="/" (click)="logout()">Sair</a>
                         </div>
                     </div>
                 </li>

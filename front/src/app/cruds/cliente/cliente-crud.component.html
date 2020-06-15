@@ -21,9 +21,8 @@
   </div>
   <div class="form-row mt-4" *ngIf="newCliente">
       <div class="col"><input placeholder="Nome" type="text" class="form-control" [(ngModel)]="newCliente.nome" name="nome" /></div>
-      <div class="col"><input placeholder="CPF" type="text" class="form-control" [(ngModel)]="newCliente.CPF" name="CPF" /></div>
       <div class="col"><input placeholder="E-mail" type="text" class="form-control" [(ngModel)]="newCliente.email" name="email" /></div>
-      <div class="col"><input placeholder="Telefone" type="text" class="form-control" [(ngModel)]="newCliente.telefone" name="telefone" /></div>
+      <div class="col"><input placeholder="Telefone" type="text" class="form-control" [(ngModel)]="newCliente.tel" name="telefone" /></div>
       <div class="col"><input placeholder="Endereço" type="text" class="form-control" [(ngModel)]="newCliente.endereco" name="endereco" /></div>
       <div class="col"><button class="btn btn-primary" id="submit" type="button" (click)="insertCliente()">Salvar</button></div>
   </div>
@@ -41,7 +40,6 @@
                   <thead>
                       <tr>
                           <th>Nome</th>
-                          <th>CPF</th>
                           <th>E-mail</th>
                           <th>Telefone<br />
                           <th>Endereço<br /></th>
@@ -52,16 +50,14 @@
                       <tr *ngFor="let cliente of clientes">
                           <ng-template [ngIf]="selectedToEdit != cliente.id">
                               <td>{{ cliente.nome }}</td>
-                              <td>{{ cliente.CPF }}</td>
                               <td>{{ cliente.email }}</td>
-                              <td>{{ cliente.telefone }}</td>
+                              <td>{{ cliente.tel }}</td>
                               <td>{{ cliente.endereco }}</td>
                           </ng-template>
                           <ng-template [ngIf]="selectedToEdit == cliente.id">
                               <td><input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome" /></td>
-                              <td><input type="text" class="form-control" [(ngModel)]="cliente.CPF" name="CPF" /></td>
                               <td><input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" /></td>
-                              <td><input type="text" class="form-control" [(ngModel)]="cliente.telefone" name="telefone" /></td>
+                              <td><input type="text" class="form-control" [(ngModel)]="cliente.tel" name="telefone" /></td>
                               <td><input type="text" class="form-control" [(ngModel)]="cliente.endereco" name="endereco" /></td>
                           </ng-template>
 

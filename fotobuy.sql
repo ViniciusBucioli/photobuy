@@ -14,15 +14,22 @@ CREATE TABLE Aluguel_Produto (
     preco int NOT NULL
 );
 
+Create table User (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    userName nvarchar(10),
+    userType NVARCHAR(20),
+    password Nvarchar(30)
+);
+
 -- Table: Cliente
 CREATE TABLE Cliente (
 	id int (5) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    username NVARCHAR(10),
-    CPF int (12) NOT NULL,
     nome TEXT (100) NOT NULL,
     email TEXT (50) NOT NULL,
-    telefone int (15) NULL,
-    endereco TEXT (200) NULL);
+    tel int (15) NULL,
+    endereco TEXT (200) NULL,
+    pass TEXT (200) NULL
+    );
 
 -- Table: Estoque
 CREATE TABLE Estoque (
@@ -54,7 +61,7 @@ INSERT INTO Funcionario (
     salario, telefone, endereco, 
     meta, comissao, vendas,
     senha)
-    VALUES (default, 47498755890, 'Vinicius Bucioli',
+    VALUES (default, 474987550, 'Vinicius Bucioli',
     'Vendedor', '', 'vini123@gmail.com', 
     10000, 19988038368, 'rua1nuemiroasdasdfasdf', 
     1000, 12, 5,
@@ -68,7 +75,7 @@ CREATE TABLE Produto (
       categoria TEXT (50) NOT NULL, 
       preco int NOT NULL, 
       descricao TEXT (200) NOT NULL,
-      img nvarchar(1000) NULL);
+      imgPath nvarchar(1000) NULL);
 -- insert into produto values (default, "Câmera Nikom 15200", "Camera", 1200, "Câmera Nikom com alta qualidade");
 -- insert into produto values (default, "Tripe", "Acessorios", 300, "Tripe para camera, altura máxima 2.5 m");
 -- insert into produto values (default, "Pano verde", "Estudio", 200, "Pano verde para o plano de fundo 5m x 5m");

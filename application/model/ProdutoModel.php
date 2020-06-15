@@ -27,6 +27,26 @@
         public function setImg($imgPath) { $this->imgPath = $imgPath; }
         public function getImg() { return $this->imgPath; }
 
+        private $json;
+        public function getResultJSON() {
+            return json_encode(array(
+                "nome" => $this->nome,
+                "categoria" => $this->categoria,
+                "preco" => $this->preco,
+                "descricao" => $this->descricao,
+                "imgPath" => $this->imgPath
+
+           ));
+        }
+        public function getErrorJSON() {
+            return json_encode(
+                array(
+                    "this" => array($this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath),
+                    $this->json
+                )
+            );
+        }
+
         private $conn;
         function __construct(){
             $db = new db();
@@ -39,14 +59,10 @@
                 $query->bind_param('sssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath);
                 $result = $query->execute();
                 $this->conn->close();
-                if ($result) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return $result;
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
-                return $error;
+                $this->json = json_encode(array("message" => "Não foi possível cria o produto.", "error" => $error));
             }
         }
         
@@ -54,11 +70,8 @@
             if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ?, imgPath = ? WHERE id = ?')){
                 $query->bind_param('ssssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath, $this->id);
                 $result = $query->execute();
-                if($result)
-                    return true;
-                else
-                    return false;
                 $this->conn->close();
+                return false;
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
                 return $error;
@@ -69,13 +82,10 @@
         public function delete($id) {
         
             if($query = $this->conn->prepare('DELETE FROM Produto WHERE id = ?')){
-                $query->bind_param('s', $id);
+                $query->bind_param('d', $id);
                 $result = $query->execute();
-                if($result)
-                    return true;
-                else
-                    return false;
                 $this->conn->close();
+                return $result;
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
                 return $error;
@@ -83,7 +93,7 @@
 
         }
 
-        public function get($id) {
+        public function getById($id) {
             if($query = $this->conn->prepare('SELECT * FROM Produto WHERE id = ?')) {
                 $query->bind_param("d", $id);
                 $query->execute();
@@ -99,7 +109,7 @@
                 }
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
-                return $error;
+                echo $error;
             }
         }
 

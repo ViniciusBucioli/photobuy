@@ -6,6 +6,10 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { UserService } from '../../user.service';
+import { UserType } from '../../enums/user-type.enum';
+import { IUser } from '../../cruds/models/user-interface';
+import { ClienteModel } from '../../cruds/models/cliente-model.model';
+import { NotificationService } from '../../notification.service';
 
 @Component({
   selector: 'app-new-account',
@@ -16,30 +20,28 @@ export class NewAccountComponent implements OnInit {
     @ViewChild('fileUpload') fileUpload: ElementRef;
     private perfilImage: any;
     private imageOk = false;
+    private userType: UserType = UserType.client;
+    public user: IUser;
 
     constructor(
         private userService: UserService,
         private router: Router,
-        private sessionStorage: SessionStorageService
+        private sessionStorage: SessionStorageService,
+        private notification: NotificationService
     ) { }
 
     ngOnInit() {
+        this.user = new ClienteModel();
+        this.user.userType = UserType.client;
     }
 
     public onSubmit() {
-        // const sucess = () => {
-        //     this.router.navigateByUrl('/login');
-        //     this.sessionStorage.addNotification({message: 'Usuário criado, faça login.', onRouter: '/login' });
-        // };
-
-        // if (Number(this.userType) === UserType.beneficiario) {
-        //     this.beneficiario.set(this.usuario);
-        //     this.userService.newUser(this.beneficiario).subscribe(sucess);
-        // } else {
-        //     const doador = new DoadorModel();
-        //     doador.set(this.usuario);
-        //     this.userService.newUser(doador).subscribe(sucess);
-        // }
+        const sucess = () => {
+            this.router.navigateByUrl('/login');
+            this.notification.addNotification({message: 'Usuário criado, faça login.', onRouter: '/login' });
+        };
+        this.userService.newUser(this.user).subscribe(sucess);
+        
     }
 
     public fileUploadClick() {
