@@ -2,15 +2,15 @@
     require_once '../../model/ClienteModel.php';
     require '../header.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'DELETE') {
+    if($_SERVER['REQUEST_METHOD'] != 'POST') {
         http_response_code(400);
        
-        echo json_encode(array("message" => "Apenas DELETE."));
+        echo json_encode(array("message" => "Apenas POST."));
         exit();
     }
 
     if(
-        empty($_DELETE['id'])
+        empty($_POST['id'])
     )   {
          // Bad request
          http_response_code(400);
@@ -19,7 +19,7 @@
          exit();
      }
     
-     $id = $_DELETE['id'];
+     $id = $_POST['id'];
      $clienteModel = new ClienteModel();
 
      if($clienteModel->delete($id)) {

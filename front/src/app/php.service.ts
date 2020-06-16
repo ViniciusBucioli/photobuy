@@ -20,7 +20,9 @@ export class PhpService {
 
         // new HttpHeaders()
         // .set('Content-Type', 'application/x-www-form-urlencoded')
-        this.headers = {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}) };
+        // application/x-www-form-urlencoded
+        this.headers = {headers: new HttpHeaders({'Content-Type':'application/json; charset=utf-8'}) };
+        // this.headers = {headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}) };
     }
 
     public get<T>(url: string): Observable<any> {
@@ -32,11 +34,11 @@ export class PhpService {
         .pipe(tap((e: any) => {console.log(e)}, this.errorLog));
     }
     public put<T>(url: string, body: any): Observable<any> {
-        return this.httpClient.put(url, this.functions.objectToFormData(body), this.headers)
+        return this.httpClient.post(url, this.functions.objectToFormData(body), this.headers)
         .pipe(tap(() => {}, this.errorLog));
     }
     public delete<T>(url: string, id: number): Observable<any> {
-        return this.httpClient.delete(url)
+        return this.httpClient.post(url, this.toHttp({'id': id}))
         .pipe(tap(() => {}, this.errorLog));
     }
     private errorLog = (e: any) => {

@@ -2,7 +2,6 @@
 
 require './header.php';
 
-// $currency = $_GET['currency'];
 // $value = $_GET['value'];
 
 $url = 'https://api.exchangeratesapi.io/latest?base=BRL';
@@ -26,6 +25,15 @@ if (curl_errno ( $ch )) {
 curl_close ( $ch );
 
 // dump output of api if you want during test
-echo "$file_contents";
+$exchange = json_decode("$file_contents", true);
 
+if(isset($_GET['currency']) && isset($_GET['value'])) {
+    $currency = $_GET['currency'];
+    $coefficient = $exchange["rates"][$currency];
+    $value = $_GET['value'];
+    $result = $value * $coefficient;
+    echo "{\"BRL_USD\": $result}";
+} else {
+    echo "$file_contents";
+}
 ?>

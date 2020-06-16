@@ -2,10 +2,10 @@
     require_once '../../model/ProdutoModel.php';
     require '../header.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'DELETE') {
+    if($_SERVER['REQUEST_METHOD'] != 'POST') {
         http_response_code(400);
        
-        echo json_encode(array("message" => "Apenas DELETE."));
+        echo json_encode(array("message" => "Apenas POST."));
         exit();
     }
 

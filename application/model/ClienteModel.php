@@ -69,7 +69,7 @@
 
         public function atualizar() {
             if($query = $this->conn->prepare('UPDATE Cliente SET nome = ?, email = ?, tel = ?, endereco = ?, pass = ? WHERE id = ?')){
-                $query->bind_param('sssssd', $this->nome, $this->email, $this->telefone, $this->endereco, $this->pass, $this->id);
+                $query->bind_param('sssssd', $this->nome, $this->email, $this->tel, $this->endereco, $this->pass, $this->id);
                 $result = $query->execute();
                 $this->conn->close();
                 return $result;
