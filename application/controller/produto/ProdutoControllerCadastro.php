@@ -3,7 +3,7 @@
     require '../header.php';
     require '../../Managers/ImageManager.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'POST') {
+    if($REQUEST != 'POST') {
         // Bad request
         http_response_code(400);
         

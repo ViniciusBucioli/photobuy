@@ -2,7 +2,7 @@
     require_once '../../model/ClienteModel.php';
     require '../header.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'POST') {
+    if($REQUEST != 'POST') {
         http_response_code(400);
        
         echo json_encode(array("message" => "Apenas POST."));

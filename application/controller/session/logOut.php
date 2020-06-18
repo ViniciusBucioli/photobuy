@@ -1,7 +1,7 @@
 <?php
     require '../header.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'GET') {
+    if($REQUEST != 'GET') {
         // Bad request
         http_response_code(400);
         

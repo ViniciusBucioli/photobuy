@@ -11,7 +11,7 @@
 
 namespace h4cc\Multipart;
 
-use MultipartParser;
+use h4cc\Multipart\Parser\MultipartParser;
 
 /**
  * Facade for parsing and selecting the right Multipart Parser.

@@ -11,7 +11,7 @@
 
 namespace h4cc\Multipart;
 
-use h4cc\Multipart\Parser\MultipartParser;
+use h4cc\Multipart\Parser;
 
 /**
  * Facade for parsing and selecting the right Multipart Parser.
@@ -32,7 +32,7 @@ class ParserSelector
 
         list($mime, $boundary) = $this->parseContentType($contentType);
 
-        $parser = new MultipartParser();
+        $parser = new h4cc\Multipart\Parser\MultipartParser();
         $parser->setBoundary($boundary);
 
         return $parser;
@@ -60,4 +60,4 @@ class ParserSelector
 
         return [strtolower(trim($mime)), $boundaryValue];
     }
-} 
+}

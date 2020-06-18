@@ -68,15 +68,28 @@
         }
 
         public function atualizar() {
-            if($query = $this->conn->prepare('UPDATE Cliente SET nome = ?, email = ?, tel = ?, endereco = ?, pass = ? WHERE id = ?')){
-                $query->bind_param('sssssd', $this->nome, $this->email, $this->tel, $this->endereco, $this->pass, $this->id);
-                $result = $query->execute();
-                $this->conn->close();
-                return $result;
+            if($this->pass == null) {
+                if($query = $this->conn->prepare('UPDATE Cliente SET nome = ?, email = ?, tel = ?, endereco = ? WHERE id = ?')){
+                    $query->bind_param('ssssd', $this->nome, $this->email, $this->tel, $this->endereco, $this->id);
+                    $result = $query->execute();
+                    $this->conn->close();
+                    return $result;
+                } else {
+                    $error = $this->conn->errno . ' ' . $this->conn->error;
+                    echo $error;
+                    return false;
+                }
             } else {
-                $error = $this->conn->errno . ' ' . $this->conn->error;
-                echo $error;
-                return false;
+                if($query = $this->conn->prepare('UPDATE Cliente SET nome = ?, email = ?, tel = ?, endereco = ?, pass = ? WHERE id = ?')){
+                    $query->bind_param('sssssd', $this->nome, $this->email, $this->tel, $this->endereco, $this->pass, $this->id);
+                    $result = $query->execute();
+                    $this->conn->close();
+                    return $result;
+                } else {
+                    $error = $this->conn->errno . ' ' . $this->conn->error;
+                    echo $error;
+                    return false;
+                }
             }
         }
 

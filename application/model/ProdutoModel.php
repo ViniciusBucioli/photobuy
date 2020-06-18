@@ -68,10 +68,10 @@
         
         public function atualizar() {
             if($query = $this->conn->prepare('UPDATE Produto SET nome = ?, categoria = ?, preco = ?, descricao = ?, imgPath = ? WHERE id = ?')){
-                $query->bind_param('ssssss', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath, $this->id);
+                $query->bind_param('sssssd', $this->nome, $this->categoria, $this->preco, $this->descricao, $this->imgPath, $this->id);
                 $result = $query->execute();
                 $this->conn->close();
-                return false;
+                return $result;
             } else {
                 $error = $this->conn->errno . ' ' . $this->conn->error;
                 return $error;

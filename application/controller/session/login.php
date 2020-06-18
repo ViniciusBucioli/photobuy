@@ -2,7 +2,7 @@
     require '../header.php';
     require_once '../../model/UserModel.php';
 
-    if($_SERVER['REQUEST_METHOD'] != 'POST') {
+    if($REQUEST != 'POST') {
         // Bad request
         http_response_code(400);
         

@@ -2,25 +2,34 @@
     require_once '../../model/ProdutoModel.php';
     require '../header.php';
     require '../../Managers/ImageManager.php';
-    
-    if(
-        empty($_POST['id']) ||
-        empty($_POST['nome']) ||
-        empty($_POST['categoria']) ||
-        empty($_POST['preco']) ||
-        empty($_POST['descricao'])
-    ) {
+    require '../session/checkSession.php';
+
+    if($REQUEST != 'PUT') {
         // Bad request
         http_response_code(400);
-        echo json_encode(array("message" => "Dados incompletos."));
+        echo json_encode(array("message" => "Apenas PUT."));
         exit();
     }
 
-    $id = $_POST['id'];
-    $nome = $_POST['nome'];
-    $categoria = $_POST['categoria'];
-    $preco = $_POST['preco'];
-    $descricao = $_POST['descricao'];
+    if(
+        empty($_PUT['id']) ||
+        empty($_PUT['nome']) ||
+        empty($_PUT['categoria']) ||
+        empty($_PUT['preco']) ||
+        empty($_PUT['descricao'])
+    ) {
+        // Bad request
+        http_response_code(400);
+        $RETURN["message"] = "Dados incompletos.";
+        echo json_encode($RETURN);
+        exit();
+    }
+    
+    $id = $_PUT['id'];
+    $nome = $_PUT['nome'];
+    $categoria = $_PUT['categoria'];
+    $preco = $_PUT['preco'];
+    $descricao = $_PUT['descricao'];
 
     if (isset($_FILES['imgFile'])) {
 

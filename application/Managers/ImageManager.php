@@ -61,7 +61,7 @@ class ImageManager {
 
     private function deleteLastImg($id) {
         $product = new ProdutoModel();
-        $product->get($id);
+        $product->getById($id);
         if ($product->getImg() != null) {
             $target_file = $this->img_dir.$product->getImg();
             if($this->checkFileExists($target_file)) {
